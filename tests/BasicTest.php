@@ -22,6 +22,7 @@ class BasicTest extends TestCase
         	->genres('include', ['Action', 'Drama', 'Historical'])
             ->releasedYear('<', '2017')
             ->rating('>', 4)
+            ->completed(0)
         	->sortBy('name', 'ASC')
         	->get();
 

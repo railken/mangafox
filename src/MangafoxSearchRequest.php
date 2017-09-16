@@ -90,7 +90,6 @@ class MangafoxSearchRequest
 			'author' => $builder->getAuthor()->get('value'),
 			'artist_method' => $this->getRawCommonFilter($builder->getArtist()->get('filter')),
 			'artist' => $builder->getArtist()->get('value'),
-			'is_completed' => '',
 			'sort' => $builder->getSortBy()->get('field'),
 			'order' => $builder->getSortBy()->get('direction') == 'desc' ? 'za' : 'az',
 			'advopts' => 1
@@ -106,8 +105,10 @@ class MangafoxSearchRequest
 		$params['rating_method'] = $this->getRawCommonFilter2($builder->getRating()->get('filter'));
 		$params['rating'] = $builder->getRating()->get('value');
 
-		print_r($params);
-		
+		if ($builder->getCompleted() !== null)
+			$params['is_completed'] = $builder->getCompleted() === true ? "1" : "0";
+
+
 		$results = $this->manager->request("GET", "/search.php", $params);
 
 		$parser = new MangafoxSearchParser($this->manager);

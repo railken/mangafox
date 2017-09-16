@@ -70,6 +70,13 @@ class MangafoxSearchBuilder
 	protected $rating;
 
 	/**
+	 * Completed
+	 *
+	 * @var boolean
+	 */
+	protected $completed = null;
+
+	/**
 	 * Construct
 	 *
 	 * @param Mangafox $manager
@@ -367,6 +374,33 @@ class MangafoxSearchBuilder
 	public function getRating()
 	{
 		return $this->rating;
+	}
+
+	/**
+	 * Set the sort of resource searched
+	 *
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function completed($value)
+	{
+
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidCompletedValueException::class, $value, [null, '1', '0']);
+
+		$this->completed = (boolean)$value;
+		
+		return $this;
+	}
+
+	/**
+	 * Retrieve sort
+	 *
+	 * @return string
+	 */
+	public function getCompleted()
+	{
+		return $this->completed;
 	}
 
 	/**
