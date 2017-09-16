@@ -47,8 +47,9 @@ class Bag
 	 */
 	public function __get($attribute)
 	{
-		if (isset($this->{$attribute}))
-			return $this->{$attribute};
-		
+
+		if ($value = $this->get($attribute))
+			return $value;
+
 	}
 }

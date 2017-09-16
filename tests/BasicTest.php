@@ -16,12 +16,18 @@ class BasicTest extends TestCase
         $results = $m
         	->search()
         	->type('any') # any|manga|chinese|korean
-        	->name('contains', 'One piece')
-        	->author('contains', '')
-        	->artist('contains', '')
+        	->name('contains', 'One Piece')
+        	->author('contains', 'Oda Eiichiro')
+        	->artist('contains', 'Oda Eiichiro')
         	//->genres(['Action' => -1, 'Drama' => 0, 'Historical' => 1])
         	//->orderBy('name', 'ASC')  # name|rating|views|chapters|latest_chapter : asc|desc
         	->get();
+
+        $manga = $results->filter(function($v) {
+            return $v->uid == 'one_piece';
+        })->first();
+
+        $this->assertEquals(106, $manga->id);
 
         /*
         $results = $m

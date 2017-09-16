@@ -193,6 +193,8 @@ class MangafoxSearchBuilder
 	public function get()
 	{
 
-		$request = (new MangafoxSearchRequest($this->manager))->send($this);
+		$request = new MangafoxSearchRequest($this->manager);
+
+		return $request->send($this);
 	}
 }

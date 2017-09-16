@@ -75,6 +75,8 @@ class MangafoxSearchRequest
 
 		$results = $this->manager->request("GET", "/search.php", $params);
 
-		$parser = (new MangafoxSearchParser($this->manager))->parse($results);
+		$parser = new MangafoxSearchParser($this->manager);
+
+		return $parser->parse($results);
 	}
 }
