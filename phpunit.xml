@@ -1,0 +1,7 @@
+<phpunit bootstrap="vendor/autoload.php">
+  <testsuites>
+    <testsuite name="mangafox">
+      <file>tests/BasicTest.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>
