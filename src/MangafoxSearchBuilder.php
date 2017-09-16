@@ -84,6 +84,14 @@ class MangafoxSearchBuilder
 	public function __construct($manager)
 	{
 		$this->manager = $manager;
+		$this->name = new Bag();
+		$this->artist = new Bag();
+		$this->author = new Bag();
+		$this->rating = new Bag();
+		$this->released_year = new Bag();
+		$this->genres = new Bag();
+		$this->sort_by = new Bag();
+		$this->genres->set('value', new Collection());
 	}
 
 	/** 
@@ -146,9 +154,9 @@ class MangafoxSearchBuilder
 	{
 		$this->commonFilter("name", $filter);
 
-		$this->name = (new Bag())
-					->set('value', $name)
-					->set('filter', $filter);
+		$this->name 
+			->set('value', $name)
+			->set('filter', $filter);
 		
 		return $this;
 	}
@@ -176,9 +184,9 @@ class MangafoxSearchBuilder
 	{
 		$this->commonFilter("author", $filter);
 		
-		$this->author = (new Bag())
-					->set('value', $author)
-					->set('filter', $filter);
+		$this->author
+			->set('value', $author)
+			->set('filter', $filter);
 		
 		return $this;
 	}
@@ -206,9 +214,9 @@ class MangafoxSearchBuilder
 	{
 		$this->commonFilter("artist", $filter);
 		
-		$this->artist = (new Bag())
-					->set('value', $artist)
-					->set('filter', $filter);
+		$this->artist
+			->set('value', $artist)
+			->set('filter', $filter);
 		
 		return $this;
 	}
@@ -241,9 +249,9 @@ class MangafoxSearchBuilder
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByValueException::class, $value, ['name', 'rating', 'views', 'chapters', 'latest_chapter']);
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException::class, $direction, ['asc', 'desc']);
 		
-		$this->sort_by = (new Bag())
-					->set('field', $value)
-					->set('direction', $direction);
+		$this->sort_by
+			->set('field', $value)
+			->set('direction', $direction);
 		
 		return $this;
 	}
@@ -270,9 +278,9 @@ class MangafoxSearchBuilder
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidGenresFilterException::class, $filter, ['include', 'exclude']);
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidGenresValueException::class, $genres, $this->manager->getGenres());
 
-		$this->genres = (new Bag())
-					->set('filter', $filter)
-					->set('value', new Collection($genres));
+		$this->genres
+			->set('filter', $filter)
+			->set('value', new Collection($genres));
 
 		return $this;
 	}
@@ -327,9 +335,9 @@ class MangafoxSearchBuilder
 			throw new Exceptions\MangafoxSearchBuilderInvalidReleasedYearValueException($value);
 		}
 
-		$this->released_year = (new Bag())
-					->set('filter', $filter)
-					->set('value', $value);
+		$this->released_year
+			->set('filter', $filter)
+			->set('value', $value);
 		
 		return $this;
 	}
@@ -359,9 +367,9 @@ class MangafoxSearchBuilder
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidRatingFilterException::class, $filter, ['<', '=', '>']);
 		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidRatingValueException::class, $value, [null, '0', '1', '2', '3', '4', '5']);
 
-		$this->rating = (new Bag())
-					->set('filter', $filter)
-					->set('value', $value);
+		$this->rating
+			->set('filter', $filter)
+			->set('value', $value);
 		
 		return $this;
 	}
