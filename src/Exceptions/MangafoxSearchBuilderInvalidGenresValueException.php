@@ -8,6 +8,6 @@ class MangafoxSearchBuilderInvalidGenresValueException extends MangafoxSearchBui
 
 	public function __construct($value = null, $suggestions = [])
 	{
-		return parent::__construct('genres', $value, $suggestions);
+		return parent::__construct('genres', implode(", ", $value), $suggestions);
 	}
 }
