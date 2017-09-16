@@ -41,6 +41,13 @@ class MangafoxSearchBuilder
 	protected $author;
 
 	/**
+	 * Sort By
+	 *
+	 * @var Bag
+	 */
+	protected $sort_by;
+
+	/**
 	 * Construct
 	 *
 	 * @param Mangafox $manager
@@ -184,6 +191,46 @@ class MangafoxSearchBuilder
 	{
 		return $this->artist;
 	}
+
+
+
+	/**
+	 * Set the sort of resource searched
+	 *
+	 * @param string $filter
+	 * @param string $sort
+	 *
+	 * @return $this
+	 */
+	public function sortBy($value, $direction)
+	{
+
+		$direction = strtolower($direction);
+		
+		if (!in_array($value, ['name', 'rating', 'views', 'chapters', 'latest_chapter']))
+			throw new Exceptions\MangafoxSearchBuilderInvalidSortByValueException();
+
+		if (!in_array($direction, ['asc', 'desc']))
+			throw new Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException($direction);
+		
+		$this->sort_by = (new Bag())
+					->set('field', $value)
+					->set('direction', $direction);
+		
+		return $this;
+	}
+
+	/**
+	 * Retrieve sort
+	 *
+	 * @return string
+	 */
+	public function getSortBy()
+	{
+		return $this->sort_by;
+	}
+
+
 
 	/**
 	 * Send request

@@ -70,6 +70,8 @@ class MangafoxSearchRequest
 			'rating_method' => 'eq',
 			'rating' => '',
 			'is_completed' => '',
+			'sort' => $builder->getSortBy()->get('field'),
+			'order' => $builder->getSortBy()->get('direction') == 'desc' ? 'za' : 'az',
 			'advopts' => 1
 		];
 
