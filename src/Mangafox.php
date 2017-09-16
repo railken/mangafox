@@ -5,8 +5,18 @@ namespace Railken\Mangafox;
 class Mangafox extends MangaReader
 {
 
+	/**
+	 * Base url mangafox
+	 *
+	 * @var string
+	 */
 	protected $url = 'http://mangafox.me/';
 
+	/**
+	 * List of genres available on mangafox
+	 *
+	 * @var string[]
+	 */
 	protected $genres = [
 		'Action',
 		'Adult',
@@ -45,12 +55,23 @@ class Mangafox extends MangaReader
 		'Yuri'
 	];
 
+	/**
+	 * Perform a search
+	 *
+	 * @return MangaFoxSearchBuilder
+	 */
 	public function search()
 	{
 		return new MangafoxSearchBuilder($this);
 	}
 
-	public function getGenres(){
+	/**
+	 * Retrieve genres available on mangafox
+	 *
+	 * @return array
+	 */
+	public function getGenres()
+	{
 		return $this->genres;
 	}
 
