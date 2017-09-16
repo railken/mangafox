@@ -94,25 +94,43 @@ class MangafoxSearchBuilder
 		$this->genres->set('value', new Collection());
 	}
 
+	/**
+	 * Throw an exceptions if value doesn't match with suggestion
+	 *
+	 * @param string $class 
+	 * @param mixed $value
+	 * @param array $suggestions
+	 *
+	 * @return void
+	 */
+	public function throwExceptionInvalidValue($class, $value, $suggestions)
+	{
+		if (is_array($value)) {
+
+			if (count(array_diff($value, $suggestions)) != 0)
+				throw new $class($value, $suggestions);
+		} else {
+
+			if (!in_array($value, $suggestions))
+				throw new $class($value, $suggestions);
+		}
+
+	}
+
+
+
 	/** 
 	  * Set common filter for "contains"|"begin"|"end" for name, author and artist
 	  *
-	  * @param string $attribute
+	  * @param string $class
+	  * @param string $method
 	  * @param string $value
 	  *
 	  * @return void
 	  */
-	private function commonFilter($attribute, $value)
+	private function throwExceptionInvalidFilter($class, $value)
 	{
-
-		$suggestions = ['contains', 'begin', 'end'];
-
-		if (!in_array($value, $suggestions))
-			throw new Exceptions\MangafoxSearchBuilderInvalidFilterException($attribute, $value, $suggestions);
-
-		$attribute .= "_filter";
-
-		$this->{$attribute} = $value;
+		return $this->throwExceptionInvalidValue($class, $value, ['contains', 'begin', 'end']);
 	}
 
 	/**
@@ -152,7 +170,7 @@ class MangafoxSearchBuilder
 	 */
 	public function name($filter, $name)
 	{
-		$this->commonFilter("name", $filter);
+		$this->throwExceptionInvalidFilter(Exceptions\MangafoxSearchBuilderInvalidNameFilterException::class, $filter);
 
 		$this->name 
 			->set('value', $name)
@@ -182,7 +200,7 @@ class MangafoxSearchBuilder
 	 */
 	public function author($filter, $author)
 	{
-		$this->commonFilter("author", $filter);
+		$this->throwExceptionInvalidFilter(Exceptions\MangafoxSearchBuilderInvalidAuthorFilterException::class, $filter);
 		
 		$this->author
 			->set('value', $author)
@@ -212,7 +230,8 @@ class MangafoxSearchBuilder
 	 */
 	public function artist($filter, $artist)
 	{
-		$this->commonFilter("artist", $filter);
+		$this->throwExceptionInvalidFilter(Exceptions\MangafoxSearchBuilderInvalidArtistFilterException::class, $filter);
+
 		
 		$this->artist
 			->set('value', $artist)
@@ -293,29 +312,6 @@ class MangafoxSearchBuilder
 	public function getGenres()
 	{
 		return $this->genres;
-	}
-
-	/**
-	 * Throw an exceptions if value doesn't match with suggestion
-	 *
-	 * @param string $class 
-	 * @param mixed $value
-	 * @param array $suggestions
-	 *
-	 * @return void
-	 */
-	public function throwExceptionInvalidValue($class, $value, $suggestions)
-	{
-		if (is_array($value)) {
-
-			if (count(array_diff($value, $suggestions)) != 0)
-				throw new $class($value, $suggestions);
-		} else {
-
-			if (!in_array($value, $suggestions))
-				throw new $class($value, $suggestions);
-		}
-
 	}
 
 	/**

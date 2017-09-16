@@ -32,25 +32,25 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidFilterException
+     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidNameFilterException
      */
-    public function testMangafoxSearchBuilderInvalidFilterException()
+    public function testMangafoxSearchBuilderInvalidNameFilterException()
     {
         $this->manager->search()->name('wrong', 'One Piece');
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidFilterException
+     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidAuthorFilterException
      */
-    public function testMangafoxSearchBuilderInvalidFilterException2()
+    public function testMangafoxSearchBuilderInvalidAuthorFilterException2()
     {
         $this->manager->search()->author('wrong', 'Oda Eiichiro');
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidFilterException
+     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidArtistFilterException
      */
-    public function testMangafoxSearchBuilderInvalidFilterException3()
+    public function testMangafoxSearchBuilderInvalidArtistFilterException3()
     {
         $this->manager->search()->artist('wrong', 'Oda Eiichiro');
     }
