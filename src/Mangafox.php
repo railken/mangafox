@@ -2,10 +2,14 @@
 
 namespace Railken\Mangafox;
 
-class Mangafox
+class Mangafox extends MangaReader
 {
-	public function __construct()
+
+	protected $url = 'http://mangafox.me/';
+
+	public function search()
 	{
-		
+		return new MangafoxSearchBuilder($this);
 	}
+
 }
