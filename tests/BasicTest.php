@@ -20,6 +20,8 @@ class BasicTest extends TestCase
         	->author('contains', 'Oda Eiichiro')
         	->artist('contains', 'Oda Eiichiro')
         	->genres('include', ['Action', 'Drama', 'Historical'])
+            ->releasedYear('<', '2017')
+            ->rating('>', 4)
         	->sortBy('name', 'ASC')
         	->get();
 

@@ -56,6 +56,20 @@ class MangafoxSearchBuilder
 	protected $genres;
 
 	/**
+	 * Released year
+	 *
+	 * @var Bag
+	 */
+	protected $released_year;
+
+	/**
+	 * Rating
+	 *
+	 * @var Bag
+	 */
+	protected $rating;
+
+	/**
 	 * Construct
 	 *
 	 * @param Mangafox $manager
@@ -287,6 +301,72 @@ class MangafoxSearchBuilder
 				throw new $class($value, $suggestions);
 		}
 
+	}
+
+	/**
+	 * Set the sort of resource searched
+	 *
+	 * @param string $filter
+	 * @param string $sort
+	 *
+	 * @return $this
+	 */
+	public function releasedYear($filter, $value)
+	{
+
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidReleasedYearFilterException::class, $filter, ['<', '=', '>']);
+
+		if (!checkdate(1, 1, (int)$value)) {
+			throw new Exceptions\MangafoxSearchBuilderInvalidReleasedYearValueException($value);
+		}
+
+		$this->released_year = (new Bag())
+					->set('filter', $filter)
+					->set('value', $value);
+		
+		return $this;
+	}
+
+	/**
+	 * Retrieve sort
+	 *
+	 * @return string
+	 */
+	public function getReleasedYear()
+	{
+		return $this->released_year;
+	}
+
+
+	/**
+	 * Set the sort of resource searched
+	 *
+	 * @param string $filter
+	 * @param string $sort
+	 *
+	 * @return $this
+	 */
+	public function rating($filter, $value)
+	{
+
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidRatingFilterException::class, $filter, ['<', '=', '>']);
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidRatingValueException::class, $value, [null, '0', '1', '2', '3', '4', '5']);
+
+		$this->rating = (new Bag())
+					->set('filter', $filter)
+					->set('value', $value);
+		
+		return $this;
+	}
+
+	/**
+	 * Retrieve sort
+	 *
+	 * @return string
+	 */
+	public function getRating()
+	{
+		return $this->rating;
 	}
 
 	/**
