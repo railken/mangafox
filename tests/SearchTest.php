@@ -8,8 +8,16 @@ use Railken\Mangafox\Exceptions as Exceptions;
 class SearchTest extends TestCase
 {
 
+    /**
+     * @var Railken\Mangafox\Mangafox
+     */
     private $manager;
 
+    /**
+     * Called on setup
+     *
+     * @return void
+     */
     public function setUp()
     {
         $this->manager = new Mangafox();
