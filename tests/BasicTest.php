@@ -19,7 +19,7 @@ class BasicTest extends TestCase
         	->name('contains', 'One Piece')
         	->author('contains', 'Oda Eiichiro')
         	->artist('contains', 'Oda Eiichiro')
-        	//->genres(['Action' => -1, 'Drama' => 0, 'Historical' => 1])
+        	->genres('include', ['Action', 'Drama', 'Historical'])
         	->sortBy('name', 'ASC')
         	->get();
 

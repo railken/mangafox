@@ -1,6 +1,7 @@
 <?php
 
 namespace Railken\Mangafox;
+use Illuminate\Support\Collection;
 
 
 class MangafoxSearchRequest
@@ -74,6 +75,11 @@ class MangafoxSearchRequest
 			'order' => $builder->getSortBy()->get('direction') == 'desc' ? 'za' : 'az',
 			'advopts' => 1
 		];
+
+		$params['genres'] = $builder->getGenres()->get('value')->mapWithKeys(function($item) use ($builder){
+    		return [$item => $builder->getGenres()->get('filter') == 'include' ? 1 : 2];
+		})->toArray();
+
 
 		$results = $this->manager->request("GET", "/search.php", $params);
 

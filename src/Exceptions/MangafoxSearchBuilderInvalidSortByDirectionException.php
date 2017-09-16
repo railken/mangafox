@@ -3,11 +3,11 @@
 namespace Railken\Mangafox\Exceptions;
 
 
-class MangafoxSearchBuilderInvalidSortByDirectionException extends MangafoxException
+class MangafoxSearchBuilderInvalidSortByDirectionException extends MangafoxSearchBuilderInvalidArgumentException
 {
 
-	public function __construct($value)
+	public function __construct($value = null, $suggestions = [])
 	{
-		$this->message = sprintf("sortBy expects 'asc' or 'desc', detected %s", $value);
+		return parent::__construct('sortBy', $value, $suggestions);
 	}
 }

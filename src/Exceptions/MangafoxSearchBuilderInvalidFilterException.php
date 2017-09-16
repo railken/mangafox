@@ -2,11 +2,12 @@
 
 namespace Railken\Mangafox\Exceptions;
 
-class MangafoxSearchBuilderInvalidFilterException extends MangafoxException
+class MangafoxSearchBuilderInvalidFilterException extends MangafoxSearchBuilderInvalidArgumentException
 {
 
-	public function __construct($attribute)
+	public function __construct($field, $value = null, $suggestions = [])
 	{
-		$this->message = sprintf("The first attribute of method {$attribute} requires the following values: contains, begin, end");
+		return parent::__construct($field, $value, $suggestions);
 	}
+
 }

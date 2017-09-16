@@ -3,6 +3,7 @@
 namespace Railken\Mangafox;
 
 use Railken\Mangafox\Exceptions as Exceptions;
+use Illuminate\Support\Collection;
 
 class MangafoxSearchBuilder
 {
@@ -48,6 +49,13 @@ class MangafoxSearchBuilder
 	protected $sort_by;
 
 	/**
+	 * Genres
+	 *
+	 * @var Bag
+	 */
+	protected $genres;
+
+	/**
 	 * Construct
 	 *
 	 * @param Mangafox $manager
@@ -67,8 +75,11 @@ class MangafoxSearchBuilder
 	  */
 	private function commonFilter($attribute, $value)
 	{
-		if (!in_array($value, ['contains', 'begin', 'end']))
-			throw new Exceptions\MangafoxSearchBuilderInvalidFilterException($attribute);
+
+		$suggestions = ['contains', 'begin', 'end'];
+
+		if (!in_array($value, $suggestions))
+			throw new Exceptions\MangafoxSearchBuilderInvalidFilterException($attribute, $value, $suggestions);
 
 		$attribute .= "_filter";
 
@@ -84,9 +95,8 @@ class MangafoxSearchBuilder
 	 */
 	public function type($type)
 	{
-
-		if (!in_array($type, ['any', 'manga', 'chinese', 'korean']))
-			throw new Exceptions\MangafoxSearchBuilderInvalidTypeException();
+	
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidTypeException::class, $type, ['any', 'manga', 'chinese', 'korean']);
 
 		$this->type = $type;
 
@@ -207,11 +217,8 @@ class MangafoxSearchBuilder
 
 		$direction = strtolower($direction);
 		
-		if (!in_array($value, ['name', 'rating', 'views', 'chapters', 'latest_chapter']))
-			throw new Exceptions\MangafoxSearchBuilderInvalidSortByValueException();
-
-		if (!in_array($direction, ['asc', 'desc']))
-			throw new Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException($direction);
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByValueException::class, $value, ['name', 'rating', 'views', 'chapters', 'latest_chapter']);
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException::class, $direction, ['asc', 'desc']);
 		
 		$this->sort_by = (new Bag())
 					->set('field', $value)
@@ -230,7 +237,57 @@ class MangafoxSearchBuilder
 		return $this->sort_by;
 	}
 
+	/**
+	 * Set genres
+	 *
+	 * @param string $filter
+	 * @param array $genres
+	 */
+	public function genres($filter, $genres)
+	{
 
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidGenresFilterException::class, $filter, ['include', 'exclude']);
+		$this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidGenresValueException::class, $genres, $this->manager->getGenres());
+
+		$this->genres = (new Bag())
+					->set('filter', $filter)
+					->set('value', new Collection($genres));
+
+		return $this;
+	}
+
+	/**
+	 * Retrieve genres
+	 *
+	 * @return Bag
+	 */
+	public function getGenres()
+	{
+		return $this->genres;
+	}
+
+	/**
+	 * Throw an exceptions if value doesn't match with suggestion
+	 *
+	 * @param string $class 
+	 * @param mixed $value
+	 * @param array $suggestions
+	 *
+	 * @return void
+	 */
+	public function throwExceptionInvalidValue($class, $value, $suggestions)
+	{
+		if (is_array($value)) {
+
+			if (count(array_diff($value, $suggestions)) != 0)
+				throw new $class($value, $suggestions);
+		} else {
+
+			if (!in_array($value, $suggestions))
+				throw new $class($value, $suggestions);
+		}
+
+	}
 
 	/**
 	 * Send request
