@@ -124,6 +124,17 @@ class Mangafox extends MangaReader
 	}
 
 	/**
+	 * Perform a search in last releases
+	 *
+	 * @return MangafoxDirectory
+	 */
+	public function directory()
+	{
+		return new MangafoxDirectoryBuilder($this);
+	}
+
+
+	/**
 	 * Retrieve genres available on mangafox
 	 *
 	 * @return array
