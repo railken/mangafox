@@ -53,6 +53,8 @@ class MangafoxScanBuilder
 	public function url($url)
 	{
 		
+		$url = str_replace($this->manager->getUrl(), "/", $url);
+
 		if (!preg_match("/^\/manga\/([\w]*)\/([\w]*)\/([\w]*)\/([\w]*)\.html$/i", $url)) 
 			throw new Exceptions\MangafoxScanBuilderInvalidUrlException($url, "/manga/one_piece/v01/c001/1.html");
 		
