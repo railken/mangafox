@@ -30,15 +30,5 @@ class LatestUpdateTest extends TestCase
 
         $results = $this->manager->releases()->page(1)->get();
 
-
-        /*
-        $results = $m
-            ->directory()
-            ->browseBy('genre', 'Action')  # genre|initial_alphabetic|released_year|status
-            ->orderBy('name', 'ASC') # name|popularity|rating|latest_chapter
-            ->page(1)
-            ->get();
-        */
-
     }
 }
