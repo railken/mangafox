@@ -2,7 +2,7 @@
 
 Search and download mangas from [mangafox.me](http://mangafox.me/)
 
-MangaFox scraper is a library that can get all informations needed about mangas for a manga-reader
+MangaFox Scraper is a library that can gets all the needed information about manga for a manga-reader
 
 ## Requirements
 
@@ -77,4 +77,4 @@ Open-sourced software licensed under the [MIT license](http://opensource.org/lic
 
 ## Copyright
 
-All mangas is copyrighted to their respective author. Please buy the manga if it's available in your country.
+All manga is copyrighted to their respective author. Please buy the manga if it's available in your country.
