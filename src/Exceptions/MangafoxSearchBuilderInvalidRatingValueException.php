@@ -3,7 +3,7 @@
 namespace Railken\Mangafox\Exceptions;
 
 
-class MangafoxSearchBuilderInvalidRatingValueException extends MangafoxSearchBuilderInvalidArgumentException
+class MangafoxSearchBuilderInvalidRatingValueException extends MangafoxInvalidArgumentException
 {
 
 	public function __construct($value = null, $suggestions = [])

@@ -3,7 +3,7 @@
 namespace Railken\Mangafox\Exceptions;
 
 
-class MangafoxSearchBuilderInvalidCompletedValueException extends MangafoxSearchBuilderInvalidArgumentException
+class MangafoxSearchBuilderInvalidCompletedValueException extends MangafoxInvalidArgumentException
 {
 
 	public function __construct($value = null, $suggestions = [])

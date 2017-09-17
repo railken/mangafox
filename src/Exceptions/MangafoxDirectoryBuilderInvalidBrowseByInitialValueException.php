@@ -3,7 +3,7 @@
 namespace Railken\Mangafox\Exceptions;
 
 
-class MangafoxDirectoryBuilderInvalidBrowseByInitialValueException extends MangafoxSearchBuilderInvalidArgumentException
+class MangafoxDirectoryBuilderInvalidBrowseByInitialValueException extends MangafoxInvalidArgumentException
 {
 
 	public function __construct($value = null, $suggestions = [])

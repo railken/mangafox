@@ -3,7 +3,7 @@
 namespace Railken\Mangafox\Exceptions;
 
 
-class MangafoxSearchBuilderInvalidReleasedYearFilterException extends MangafoxSearchBuilderInvalidArgumentException
+class MangafoxSearchBuilderInvalidReleasedYearFilterException extends MangafoxInvalidArgumentException
 {
 
 	public function __construct($value = null, $suggestions = [])

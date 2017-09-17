@@ -2,7 +2,7 @@
 
 namespace Railken\Mangafox\Exceptions;
 
-class MangafoxSearchBuilderInvalidFilterException extends MangafoxSearchBuilderInvalidArgumentException
+class MangafoxSearchBuilderInvalidFilterException extends MangafoxInvalidArgumentException
 {
 
 	public function __construct($field, $value = null, $suggestions = [])
