@@ -147,6 +147,7 @@ class SearchTest extends TestCase
             ->releasedYear('<', '2017')
             ->rating('>', 4)
             ->completed(0)
+            ->page(1)
             ->sortBy('name', 'ASC')
             ->get();
 
