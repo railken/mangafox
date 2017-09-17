@@ -39,7 +39,7 @@ class MangafoxDirectoryBuilder
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
         $this->browse_by = new Bag();

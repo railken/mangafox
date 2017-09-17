@@ -17,7 +17,7 @@ class MangafoxReleasesRequest
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
     }
@@ -29,7 +29,7 @@ class MangafoxReleasesRequest
      *
      * @return MangafoxReleasesResponse
      */
-    public function send($builder)
+    public function send(MangafoxReleasesBuilder $builder)
     {
         $results = $this->manager->request("GET", "/releases/{$builder->getPage()}.htm", []);
 

@@ -54,7 +54,7 @@ class MangafoxDirectoryRequest
      *
      * @return MangafoxDirectoryResponse
      */
-    public function send($builder)
+    public function send(MangafoxDirectoryBuilder $builder)
     {
         $params = [];
 

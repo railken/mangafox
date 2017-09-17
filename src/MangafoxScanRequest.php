@@ -18,7 +18,7 @@ class MangafoxScanRequest
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
     }
@@ -31,7 +31,7 @@ class MangafoxScanRequest
      *
      * @return MangafoxScanResponse
      */
-    public function send($builder)
+    public function send(MangafoxScanBuilder $builder)
     {
         $url = $builder->getUrl() ? $builder->getUrl() : "/manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}/1.html";
 

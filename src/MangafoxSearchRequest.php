@@ -17,7 +17,7 @@ class MangafoxSearchRequest
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
     }
@@ -78,7 +78,7 @@ class MangafoxSearchRequest
      *
      * @return MangafoxSearchResponse
      */
-    public function send($builder)
+    public function send(MangafoxSearchBuilder $builder)
     {
         $params = [];
 

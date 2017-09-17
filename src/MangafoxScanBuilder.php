@@ -38,7 +38,7 @@ class MangafoxScanBuilder
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
     }

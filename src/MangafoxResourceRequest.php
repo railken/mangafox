@@ -19,7 +19,7 @@ class MangafoxResourceRequest
      *
      * @param Mangafox $manager
      */
-    public function __construct($manager)
+    public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
     }
@@ -27,11 +27,11 @@ class MangafoxResourceRequest
     /**
      * Send the request for the research
      *
-     * @param MangafoxSearchBuilder $builder
+     * @param MangafoxResourceBuilder $builder
      *
-     * @return MangafoxSearchResponse
+     * @return MangafoxResourceBuilder
      */
-    public function send($builder)
+    public function send(MangafoxResourceBuilder $builder)
     {
         $results = $this->manager->request("GET", "/manga/{$builder->getUid()}", []);
 
