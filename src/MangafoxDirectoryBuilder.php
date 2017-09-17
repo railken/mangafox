@@ -115,7 +115,7 @@ class MangafoxDirectoryBuilder
 		switch ($filter) {
 
 			case 'genre':
-				$this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenresValueException::class, $value, array_merge(["All"], $this->manager->getGenres()));
+				$this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenreValueException::class, $value, array_merge(["All"], $this->manager->getGenres()));
 			break;
 
 			case 'initial':
