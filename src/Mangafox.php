@@ -66,6 +66,18 @@ class Mangafox extends MangaReader
 	}
 
 	/**
+	 * Request a specific resource
+	 *
+	 * @param string $uid
+	 *
+	 * @return MangaFoxRetrieveBuilder
+	 */
+	public function resource($uid = null)
+	{
+		return new MangafoxResourceBuilder($this, $uid);
+	}
+
+	/**
 	 * Retrieve genres available on mangafox
 	 *
 	 * @return array

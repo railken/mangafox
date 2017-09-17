@@ -2,6 +2,7 @@
   <testsuites>
     <testsuite name="mangafox">
       <file>tests/SearchTest.php</file>
+      <file>tests/ResourceTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

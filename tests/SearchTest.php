@@ -162,35 +162,5 @@ class SearchTest extends TestCase
             ->search()
             ->get();
 
-
-
-        $search = $m->search();
-
-        $search->type('any');
-
-        /*
-        $results = $m
-            ->directory()
-            ->browseBy('genre', 'Action')  # genre|initial_alphabetic|released_year|status
-            ->orderBy('name', 'ASC') # name|popularity|rating|latest_chapter
-            ->page(1)
-            ->get();
-
-        $results = $m
-            ->latestReleases()
-            ->page(1)
-            ->get();
-
-
-        $manga = $results->first();
-
-        # Retrieve
-
-        $manga = $m->find($manga->getId());
-        $chapter = $maga->getChapters()->first();
-
-
-        $scans = $m->scan($manga, $chapter);
-        */
     }
 }
