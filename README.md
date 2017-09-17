@@ -1,8 +1,8 @@
 # MangaFox Scraper
 
-Search and download mangas from [mangafox.me](http://mangafox.me/)
+Search and download manga from [mangafox.me](http://mangafox.me/)
 
-MangaFox Scraper is a library that can gets all the needed information about manga for a manga-reader
+MangaFox Scraper is a library that gets all the needed information about manga for a manga-reader
 
 ## Requirements
 
@@ -10,7 +10,7 @@ PHP 7.0.0 and later.
 
 ## Composer
 
-You can install it via [Composer](http://getcomposer.org/). Run the following command:
+You can install it via [Composer](http://getcomposer.org/) by typing the following command:
 
 ```bash
 composer require railken/mangafox
@@ -73,8 +73,8 @@ $results = $manager
 
 ## License
 
-Open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Open-source software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Copyright
 
-All manga is copyrighted to their respective author. Please buy the manga if it's available in your country.
+All the manga are copyrighted to their respective author. Please buy the manga if it's available in your country.
