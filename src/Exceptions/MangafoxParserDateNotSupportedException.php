@@ -2,7 +2,7 @@
 
 namespace Railken\Mangafox\Exceptions;
 
-class MangafoxResourceParserDateNotSupportedException extends MangafoxException
+class MangafoxParserDateNotSupportedException extends MangafoxException
 {
 
 	public function __construct($date)
