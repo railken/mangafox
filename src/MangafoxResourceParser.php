@@ -34,10 +34,17 @@ class MangafoxResourceParser
 	 */
 	public function parse($html)
 	{
+
 		$node = HtmlPageCrawler::create($html);
 
 		$head = $node->filter("head");
 		$title = $node->filter("div#title");
+
+
+		if (!$head->filter("[property='og:url']")->getNode(0)) {
+			throw new Exceptions\MangafoxResourceParserInvalidUrlException();
+		}
+
 		$bag = new Bag();
 		$bag
 			->set('url', $head->filter("[property='og:url']")->attr('content'))

@@ -23,41 +23,21 @@ class ResourceTest extends TestCase
         $this->manager = new Mangafox();
     }
 
+    /**
+     * @expectedException Railken\Mangafox\Exceptions\MangafoxResourceRequestNotFoundException
+     */
+    public function testMangafoxResourceRequestNotFoundException()
+    {
+        $manga = $this->manager->resource('wrong')->get();
+    }
+
     public function testBasics()
     {
       
         $manga = $this->manager->resource('one_piece')->get();
 
-        print_r($manga);
+        $this->assertEquals('one_piece', $manga->uid);
 
-        /*
-        $results = $m
-            ->directory()
-            ->browseBy('genre', 'Action')  # genre|initial_alphabetic|released_year|status
-            ->orderBy('name', 'ASC') # name|popularity|rating|latest_chapter
-            ->page(1)
-            ->get();
-
-        $results = $m
-            ->latestReleases()
-            ->page(1)
-            ->get();
-        */
-
-
-
-        /*
-
-        $manga = $results->first();
-
-        # Retrieve
-
-        $manga = $m->find($manga->getId());
-        $chapter = $maga->getChapters()->first();
-
-
-        $scans = $m->scan($manga, $chapter);
-        */
 
     }
 }

@@ -3,6 +3,7 @@
 namespace Railken\Mangafox;
 use Illuminate\Support\Collection;
 
+use Railken\Mangafox\Exceptions as Exceptions;
 
 class MangafoxResourceRequest
 {
@@ -36,6 +37,13 @@ class MangafoxResourceRequest
 
 		$parser = new MangafoxResourceParser($this->manager);
 
-		return $parser->parse($results);
+		try {
+
+			return $parser->parse($results);
+		
+		} catch (Exceptions\MangafoxResourceParserInvalidUrlException $e) {
+
+			throw new Exceptions\MangafoxResourceRequestNotFoundException($builder->getUid());
+		}
 	}
 }
