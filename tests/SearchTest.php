@@ -150,6 +150,8 @@ class SearchTest extends TestCase
             ->sortBy('name', 'ASC')
             ->get();
 
+        $results = $results->results;
+        
         $manga = $results->filter(function($v) {
             return $v->uid == 'one_piece';
         })->first();

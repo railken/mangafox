@@ -32,9 +32,12 @@ class MangafoxSearchParser
 	 */
 	public function parse($html)
 	{
-		$c = HtmlPageCrawler::create($html);
+		$node = HtmlPageCrawler::create($html);
 
-		$results = $c->filter('#mangalist > ul > li')->each(function($node) {
+		$bag = new Bag();
+
+		$bag->set('pages', $node->filter("div#nav > ul > li:nth-last-child(2)")->text());
+		$bag->set('results', new Collection($node->filter('#mangalist > ul > li')->each(function($node) {
 			$bag = new Bag();
 
 			$title = $node->filter("a.title");
@@ -49,11 +52,12 @@ class MangafoxSearchParser
 				->set('genres', explode(", ", $node->filter("p.info")->attr('title')))
 				->set('rate', $node->filter("span.rate")->html())
 				;
-		});
+		})));
+		
 
-		$results = new Collection($results);
+		$bag->set('page', $node->filter("li.red")->text());
 
-		return $results;
+		return $bag;
 
 		// print_r($results);
 		// $response = new MangafoxSearchResponse();
