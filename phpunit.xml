@@ -4,6 +4,7 @@
       <file>tests/SearchTest.php</file>
       <file>tests/ResourceTest.php</file>
       <file>tests/ScanTest.php</file>
+      <file>tests/ReleasesTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>
