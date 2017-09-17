@@ -33,7 +33,6 @@ class DirectoryTest extends TestCase
             ->page(1)
             ->get();
 
-        print_r($results);
 
     }
 }
