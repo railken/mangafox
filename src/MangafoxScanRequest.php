@@ -34,23 +34,7 @@ class MangafoxScanRequest
 	public function send($builder)
 	{
 
-		$url = $builder->getUrl();
-
-		if ($url) {
-
-			// Throw exception if url doesn't match regex
-			// /manga/{string}/v{string}/c{string}/1.html
-
-
-
-		}
-
-		if (!$url) {
-
-			// Throw exception if some param are missing
-
-			$url = "/manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}/1.html";
-		}
+		$url = $builder->getUrl() ? $builder->getUrl() : "/manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}/1.html";
 
 		$scans = new Collection();
 
@@ -77,9 +61,6 @@ class MangafoxScanRequest
 		} while ($next);
 
 		return $scans;
-
-
-
 
 	}
 }
