@@ -6,11 +6,11 @@ MangaFox Scraper is a library that gets all the needed information about manga f
 
 ## Requirements
 
-PHP 7.0.0 and later.
+PHP 7.0.0 or later.
 
 ## Composer
 
-You can install it via [Composer](http://getcomposer.org/) by typing the following command:
+You can install it via [Composer](https://getcomposer.org/) by typing the following command:
 
 ```bash
 composer require railken/mangafox
@@ -73,7 +73,7 @@ $results = $manager
 
 ## License
 
-Open-source software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Copyright
 
