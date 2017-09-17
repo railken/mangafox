@@ -24,6 +24,7 @@ class LatestUpdateTest extends TestCase
     }
 
 
+    
     public function testBasics()
     {
 
