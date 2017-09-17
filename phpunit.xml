@@ -3,6 +3,7 @@
     <testsuite name="mangafox">
       <file>tests/SearchTest.php</file>
       <file>tests/ResourceTest.php</file>
+      <file>tests/ScanTest.php</file>
     </testsuite>
   </testsuites>
 </phpunit>

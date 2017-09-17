@@ -57,7 +57,7 @@ class MangafoxResourceParser
 			->set('artist', $title->filter("[valign='top']:nth-child(3) > a")->html())
 			->set('genres', explode(", ", trim($title->filter("[valign='top']:nth-child(4)")->text())))
 			->set('status', explode(",", trim($node->filter("div.data > span")->text()))[0])
-			->set('volumes', $node->filter("ul.chlist")->each(function ($node) {
+			->set('volumes', new Collection($node->filter("ul.chlist")->each(function ($node) {
 
 
 				$chapters = $node->filter("li")->each(function ($node) {
@@ -89,8 +89,8 @@ class MangafoxResourceParser
 				$bag->set('volume', $bag->get('chapters')->first()->get('volume'));
 
 				return $bag;
-			}))
-				;
+			})))
+			;
 
 
 		return $bag;

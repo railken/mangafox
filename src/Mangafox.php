@@ -56,9 +56,19 @@ class Mangafox extends MangaReader
 	];
 
 	/**
+	 * Retrieve base url
+	 *
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return $this->url;
+	}
+
+	/**
 	 * Perform a search
 	 *
-	 * @return MangaFoxSearchBuilder
+	 * @return MangafoxSearchBuilder
 	 */
 	public function search()
 	{
@@ -70,11 +80,37 @@ class Mangafox extends MangaReader
 	 *
 	 * @param string $uid
 	 *
-	 * @return MangaFoxRetrieveBuilder
+	 * @return MangafoxResourceBuilder
 	 */
 	public function resource($uid = null)
 	{
-		return new MangafoxResourceBuilder($this, $uid);
+		return (new MangafoxResourceBuilder($this))->uid($uid);
+	}
+
+	/**
+	 * Request all scans for a chapter
+	 *
+	 * @param string $manga_uid
+	 * @param string $volume_number
+	 * @param string $chapter_number
+	 *
+	 * @return MangafoxScanBuilder
+	 */
+	public function scan($manga_uid, $volume_number, $chapter_number)
+	{
+		return (new MangafoxScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
+	}
+
+	/**
+	 * Request all scans for a chapter
+	 *
+	 * @param string $url
+	 *
+	 * @return MangafoxScanBuilder
+	 */
+	public function scanByUrl($url)
+	{
+		return (new MangafoxScanBuilder($this))->url($url);
 	}
 
 	/**

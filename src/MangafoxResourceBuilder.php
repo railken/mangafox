@@ -23,14 +23,13 @@ class MangafoxResourceBuilder
 	 *
 	 * @param Mangafox $manager
 	 */
-	public function __construct($manager, $uid)
+	public function __construct($manager)
 	{
 		$this->manager = $manager;
-		$this->uid($uid);
 	}
 
 	/**
-	 * The uid of manga: "any"|"manga"|"chinese"|"korean"
+	 * The uid 
 	 *
 	 * @param string $uid
 	 *
