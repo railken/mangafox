@@ -122,6 +122,8 @@ class MangafoxSearchRequest
 		if ($builder->getCompleted() !== null)
 			$params['is_completed'] = $builder->getCompleted() === true ? "1" : "0";
 
+		$params['page'] = $builder->getPage();
+
 
 		$results = $this->manager->request("GET", "/search.php", $params);
 

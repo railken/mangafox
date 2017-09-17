@@ -77,6 +77,11 @@ class MangafoxSearchBuilder
 	protected $completed = null;
 
 	/**
+	 * @var integer
+	 */
+	protected $page = 1;
+
+	/**
 	 * Construct
 	 *
 	 * @param Mangafox $manager
@@ -94,6 +99,30 @@ class MangafoxSearchBuilder
 		$this->genres->set('value', new Collection());
 	}
 
+	/**
+	 * The page 
+	 *
+	 * @param string $page
+	 *
+	 * @return $this
+	 */
+	public function page($page)
+	{
+		$this->page = $page;
+		
+		return $this;
+	}
+
+	/**
+	 * Return page
+	 *
+	 * @return string
+	 */
+	public function getPage()
+	{
+		return $this->page;
+	}
+	
 	/**
 	 * Throw an exceptions if value doesn't match with suggestion
 	 *
