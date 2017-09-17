@@ -5,143 +5,142 @@ namespace Railken\Mangafox;
 class Mangafox extends MangaReader
 {
 
-	/**
-	 * Base url mangafox
-	 *
-	 * @var string
-	 */
-	protected $url = 'http://mangafox.me/';
+    /**
+     * Base url mangafox
+     *
+     * @var string
+     */
+    protected $url = 'http://mangafox.me/';
 
-	/**
-	 * List of genres available on mangafox
-	 *
-	 * @var string[]
-	 */
-	protected $genres = [
-		'Action',
-		'Adult',
-		'Adventure',
-		'Comedy',
-		'Doujinshi',
-		'Drama',
-		'Ecchi',
-		'Fantasy',
-		'Gender Bender',
-		'Harem',
-		'Historical',
-		'Horror',
-		'Josei',
-		'Martial Arts',
-		'Mature',
-		'Mecha',
-		'Mystery',
-		'One Shot',
-		'Psychological',
-		'Romance',
-		'School Life',
-		'Sci-fi',
-		'Seinen',
-		'Shoujo',
-		'Shoujo Ai',
-		'Shounen',
-		'Shounen Ai',
-		'Slice of Life',
-		'Smut',
-		'Sports',
-		'Supernatural',
-		'Tragedy',
-		'Webtoons',
-		'Yaoi',
-		'Yuri'
-	];
+    /**
+     * List of genres available on mangafox
+     *
+     * @var string[]
+     */
+    protected $genres = [
+        'Action',
+        'Adult',
+        'Adventure',
+        'Comedy',
+        'Doujinshi',
+        'Drama',
+        'Ecchi',
+        'Fantasy',
+        'Gender Bender',
+        'Harem',
+        'Historical',
+        'Horror',
+        'Josei',
+        'Martial Arts',
+        'Mature',
+        'Mecha',
+        'Mystery',
+        'One Shot',
+        'Psychological',
+        'Romance',
+        'School Life',
+        'Sci-fi',
+        'Seinen',
+        'Shoujo',
+        'Shoujo Ai',
+        'Shounen',
+        'Shounen Ai',
+        'Slice of Life',
+        'Smut',
+        'Sports',
+        'Supernatural',
+        'Tragedy',
+        'Webtoons',
+        'Yaoi',
+        'Yuri'
+    ];
 
-	/**
-	 * Retrieve base url
-	 *
-	 * @return string
-	 */
-	public function getUrl()
-	{
-		return $this->url;
-	}
+    /**
+     * Retrieve base url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
-	/**
-	 * Perform a search
-	 *
-	 * @return MangafoxSearchBuilder
-	 */
-	public function search()
-	{
-		return new MangafoxSearchBuilder($this);
-	}
+    /**
+     * Perform a search
+     *
+     * @return MangafoxSearchBuilder
+     */
+    public function search()
+    {
+        return new MangafoxSearchBuilder($this);
+    }
 
-	/**
-	 * Request a specific resource
-	 *
-	 * @param string $uid
-	 *
-	 * @return MangafoxResourceBuilder
-	 */
-	public function resource($uid = null)
-	{
-		return (new MangafoxResourceBuilder($this))->uid($uid);
-	}
+    /**
+     * Request a specific resource
+     *
+     * @param string $uid
+     *
+     * @return MangafoxResourceBuilder
+     */
+    public function resource($uid = null)
+    {
+        return (new MangafoxResourceBuilder($this))->uid($uid);
+    }
 
-	/**
-	 * Request all scans for a chapter
-	 *
-	 * @param string $manga_uid
-	 * @param string $volume_number
-	 * @param string $chapter_number
-	 *
-	 * @return MangafoxScanBuilder
-	 */
-	public function scan($manga_uid, $volume_number, $chapter_number)
-	{
-		return (new MangafoxScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
-	}
+    /**
+     * Request all scans for a chapter
+     *
+     * @param string $manga_uid
+     * @param string $volume_number
+     * @param string $chapter_number
+     *
+     * @return MangafoxScanBuilder
+     */
+    public function scan($manga_uid, $volume_number, $chapter_number)
+    {
+        return (new MangafoxScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
+    }
 
-	/**
-	 * Request all scans for a chapter
-	 *
-	 * @param string $url
-	 *
-	 * @return MangafoxScanBuilder
-	 */
-	public function scanByUrl($url)
-	{
-		return (new MangafoxScanBuilder($this))->url($url);
-	}
+    /**
+     * Request all scans for a chapter
+     *
+     * @param string $url
+     *
+     * @return MangafoxScanBuilder
+     */
+    public function scanByUrl($url)
+    {
+        return (new MangafoxScanBuilder($this))->url($url);
+    }
 
-	/**
-	 * Perform a search in last releases
-	 *
-	 * @return MangafoxReleasesBuilder
-	 */
-	public function releases()
-	{
-		return new MangafoxReleasesBuilder($this);
-	}
+    /**
+     * Perform a search in last releases
+     *
+     * @return MangafoxReleasesBuilder
+     */
+    public function releases()
+    {
+        return new MangafoxReleasesBuilder($this);
+    }
 
-	/**
-	 * Perform a search in last releases
-	 *
-	 * @return MangafoxDirectory
-	 */
-	public function directory()
-	{
-		return new MangafoxDirectoryBuilder($this);
-	}
+    /**
+     * Perform a search in last releases
+     *
+     * @return MangafoxDirectory
+     */
+    public function directory()
+    {
+        return new MangafoxDirectoryBuilder($this);
+    }
 
 
-	/**
-	 * Retrieve genres available on mangafox
-	 *
-	 * @return array
-	 */
-	public function getGenres()
-	{
-		return $this->genres;
-	}
-
+    /**
+     * Retrieve genres available on mangafox
+     *
+     * @return array
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
 }
