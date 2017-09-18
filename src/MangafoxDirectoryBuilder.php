@@ -4,6 +4,7 @@ namespace Railken\Mangafox;
 
 use Railken\Mangafox\Exceptions as Exceptions;
 use Illuminate\Support\Collection;
+use Railken\Bag;
 
 class MangafoxDirectoryBuilder
 {

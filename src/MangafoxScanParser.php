@@ -5,6 +5,7 @@ namespace Railken\Mangafox;
 use \Wa72\HtmlPageDom\HtmlPageCrawler;
 use Illuminate\Support\Collection;
 use Railken\Mangafox\Exceptions as Exceptions;
+use Railken\Bag;
 
 class MangafoxScanParser
 {

@@ -4,7 +4,8 @@
     "require": {
         "guzzlehttp/guzzle": "~6.0",
         "wa72/htmlpagedom": "^1.3",
-        "illuminate/support": "^5.5"
+        "illuminate/support": "^5.5",
+        "railken/bag": "^1.0"
     },
     "autoload": {
         "psr-4" : {

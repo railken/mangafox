@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use DateTime;
 use Railken\Mangafox\Exceptions\MangafoxResourceParserDateNotSupported;
 use Railken\Mangafox\Traits\ParseDateTrait;
+use Railken\Bag;
 
 class MangafoxResourceParser
 {

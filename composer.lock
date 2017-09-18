@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fdb1f28d88f343628dc587376e7b48e",
+    "content-hash": "e0529624b058e9afd86d96c84d1bd3e8",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -554,6 +554,29 @@
                 "simple-cache"
             ],
             "time": "2017-01-02T13:31:39+00:00"
+        },
+        {
+            "name": "railken/bag",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railken/bag.git",
+                "reference": "2dc6f82a1d820859c1e1e30d041f66b4875f8b17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railken/bag/zipball/2dc6f82a1d820859c1e1e30d041f66b4875f8b17",
+                "reference": "2dc6f82a1d820859c1e1e30d041f66b4875f8b17",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Railken\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2017-09-18T19:12:43+00:00"
         },
         {
             "name": "symfony/css-selector",
