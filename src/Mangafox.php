@@ -124,9 +124,9 @@ class Mangafox extends MangaReader
     }
 
     /**
-     * Perform a search in last releases
+     * Perform a search in directory
      *
-     * @return MangafoxDirectory
+     * @return MangafoxDirectoryBuilder
      */
     public function directory()
     {
@@ -134,6 +134,15 @@ class Mangafox extends MangaReader
     }
 
 
+    /**
+     * Retrieve a list of all resources
+     *
+     * @return MangafoxIndexBuilder
+     */
+    public function index()
+    {
+        return new MangafoxIndexBuilder($this);
+    }
     /**
      * Retrieve genres available on mangafox
      *
