@@ -1,11 +1,16 @@
-<phpunit bootstrap="vendor/autoload.php">
-  <testsuites>
-    <testsuite name="mangafox">
-      <file>tests/SearchTest.php</file>
-      <file>tests/ResourceTest.php</file>
-      <file>tests/ScanTest.php</file>
-      <file>tests/ReleasesTest.php</file>
-      <file>tests/IndexTest.php</file>
-    </testsuite>
-  </testsuites>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
