@@ -36,7 +36,6 @@ $results = $manager
     ->search()
     ->type('any')
     ->name('contains', 'One Piece')
-    ->get();
     ->author('contains', 'Oda Eiichiro')
     ->artist('contains', 'Oda Eiichiro')
     ->genres('include', ['Action', 'Drama', 'Historical'])
