@@ -59,7 +59,7 @@ class MangafoxResourceParser
             ->set('author', $title->filter("[valign='top']:nth-child(2) > a")->html())
             ->set('artist', $title->filter("[valign='top']:nth-child(3) > a")->html())
             ->set('genres', explode(", ", trim($title->filter("[valign='top']:nth-child(4)")->text())))
-            ->set('status', explode(",", trim($node->filter("div.data > span")->text()))[0])
+            ->set('status', strtolower(explode(",", trim($node->filter("#series_info .data > span")->getNode(0)->textContent))[0]))
             ->set('volumes', new Collection($node->filter("ul.chlist")->each(function ($node) {
                 $chapters = $node->filter("li")->each(function ($node) {
                     $bag = new Bag();
