@@ -47,7 +47,7 @@ class MangafoxScanRequest
             $scans[] = $scan;
             $next = $scan->next;
 
-            if (strpos($next, $this->manager->getUrl()) !== false) {
+            if (strpos("http:".$next, $this->manager->getUrl()) !== false) {
                 $next = false;
             }
 

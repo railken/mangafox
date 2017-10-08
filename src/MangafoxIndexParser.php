@@ -46,7 +46,7 @@ class MangafoxIndexParser
                 ->set('id', $title->attr('rel'))
                 ->set('uid', basename($title->attr('href')))
                 ->set('name', $title->html())
-                ->set('url', $title->attr('href'))
+                ->set('url', "http:".$title->attr('href'))
                 ;
         })));
         

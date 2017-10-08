@@ -47,7 +47,7 @@ class MangafoxSearchParser
                 ->set('id', basename($title->attr('rel')))
                 ->set('uid', basename($title->attr('href')))
                 ->set('name', $title->html())
-                ->set('url', $title->attr('href'))
+                ->set('url', "http:".$title->attr('href'))
                 ->set('cover', $node->filter("img")->attr('src'))
                 ->set('latest', $node->filter("p.latest > a")->attr('href'))
                 ->set('genres', explode(", ", $node->filter("p.info")->attr('title')))

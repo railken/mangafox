@@ -43,7 +43,7 @@ class MangafoxReleasesParser
         $bag->set('results', new Collection($node->filter("ul#updates > li")->each(function ($node) {
             $bag = new Bag();
 
-            $bag->set('url', $node->filter('.title a')->attr('href'));
+            $bag->set('url', "http:".$node->filter('.title a')->attr('href'));
             $bag->set('name', $node->filter('.title a')->text());
             $bag->set('uid', basename($bag->get('url')));
             $bag->set('chapters', $node->filter('dt')->each(function ($node) {
@@ -53,7 +53,7 @@ class MangafoxReleasesParser
                 $volume = basename(dirname(dirname($bag->get('url'))));
 
                 $bag->set('released_at', $this->parseDate($node->filter('em')->text()));
-                $bag->set('url', $node->filter('a')->attr('href'));
+                $bag->set('url', "http:".$node->filter('a')->attr('href'));
                 return $bag;
             }));
 

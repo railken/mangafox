@@ -39,7 +39,7 @@ class MangafoxScanParser
         $bag = new Bag();
 
         $bag
-            ->set('scan', $node->filter('.read_img > a > img')->attr('src'))
+            ->set('scan', $node->filter('#image')->attr('src'))
             ->set('next', $node->filter('a.next_page')->attr('href'))
             ;
 

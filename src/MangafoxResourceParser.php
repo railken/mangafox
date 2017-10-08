@@ -49,7 +49,7 @@ class MangafoxResourceParser
 
         $bag = new Bag();
         $bag
-            ->set('url', $head->filter("[property='og:url']")->attr('content'))
+            ->set('url', "http:".$head->filter("[property='og:url']")->attr('content'))
             ->set('uid', basename($bag->get('url')))
             ->set('name', $node->filter('.cover > img')->attr('alt'))
             ->set('cover', $head->filter("[property='og:image']")->attr('content'))
@@ -63,7 +63,7 @@ class MangafoxResourceParser
             ->set('volumes', new Collection($node->filter("ul.chlist")->each(function ($node) {
                 $chapters = $node->filter("li")->each(function ($node) {
                     $bag = new Bag();
-                    $bag->set('url', $node->filter("a.tips")->attr('href'));
+                    $bag->set('url', "http:".$node->filter("a.tips")->attr('href'));
                     $bag->set('title', $node->filter("span.title")->text());
                     $bag->set('released_at', $this->parseDate($node->filter("span.date")->text()));
 
