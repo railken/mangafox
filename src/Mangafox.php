@@ -10,7 +10,7 @@ class Mangafox extends MangaReader
      *
      * @var string
      */
-    protected $url = 'http://mangafox.me/';
+    protected $url = 'http://mangafox.la/';
 
     /**
      * List of genres available on mangafox
