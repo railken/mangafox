@@ -49,7 +49,7 @@ class MangafoxResourceParser
 
         $bag = new Bag();
         $bag
-            ->set('url', "http:".$head->filter("[property='og:url']")->attr('content'))
+            ->set('url', $head->filter("[property='og:url']")->attr('content'))
             ->set('uid', basename($bag->get('url')))
             ->set('name', $node->filter('.cover > img')->attr('alt'))
             ->set('cover', $node->filter(".cover > img")->attr('src'))
