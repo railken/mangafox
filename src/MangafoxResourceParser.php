@@ -52,7 +52,7 @@ class MangafoxResourceParser
             ->set('url', "http:".$head->filter("[property='og:url']")->attr('content'))
             ->set('uid', basename($bag->get('url')))
             ->set('name', $node->filter('.cover > img')->attr('alt'))
-            ->set('cover', $head->filter("[property='og:image']")->attr('content'))
+            ->set('cover', $node->filter(".cover > img")->attr('src'))
             ->set('description', $head->filter("[property='og:description']")->count() ? $head->filter("[property='og:description']")->attr('content') : null)
             ->set('aliases', explode("; ", $title->filter("h3")->text()))
             ->set('released_year', $title->filter("[valign='top']:nth-child(1) > a")->html())
