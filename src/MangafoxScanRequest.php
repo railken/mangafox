@@ -33,29 +33,13 @@ class MangafoxScanRequest
      */
     public function send(MangafoxScanBuilder $builder)
     {
-        $url = $builder->getUrl() ? $builder->getUrl() : "/manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}/1.html";
+        
+        $url = "/roll_manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}";
 
-        $scans = new Collection();
+        $results = $this->manager->requestMobile("GET", $url, []);
+        
+        $parser = new MangafoxScanParser($this->manager);
 
-        do {
-            $results = $this->manager->request("GET", $url, []);
-
-            $parser = new MangafoxScanParser($this->manager);
-            $scan = $parser->parse($results);
-
-
-            $scans[] = $scan;
-            $next = $scan->next;
-
-            if (strpos("http:".$next, $this->manager->getUrl()) !== false) {
-                $next = false;
-            }
-
-            $url = dirname($url)."/".$next;
-
-            usleep(100000);
-        } while ($next);
-
-        return $scans;
+        return $parser->parse($results);
     }
 }

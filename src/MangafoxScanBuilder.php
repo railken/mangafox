@@ -13,10 +13,6 @@ class MangafoxScanBuilder
      */
     protected $manager;
 
-    /**
-     * @var string
-     */
-    protected $url;
 
     /**
      * @var string
@@ -41,36 +37,6 @@ class MangafoxScanBuilder
     public function __construct(Mangafox $manager)
     {
         $this->manager = $manager;
-    }
-
-    /**
-     * Url of first scan
-     *
-     * @param string $url
-     *
-     * @return $this
-     */
-    public function url($url)
-    {
-        $url = str_replace($this->manager->getUrl(), "/", $url);
-
-        if (!preg_match("/^\/manga\/([\w]*)\/([\w]*)\/([\w]*)\/([\w]*)\.html$/i", $url)) {
-            throw new Exceptions\MangafoxScanBuilderInvalidUrlException($url, "/manga/one_piece/v01/c001/1.html");
-        }
-        
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Return url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**

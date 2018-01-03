@@ -17,7 +17,7 @@ abstract class MangaReader implements MangaReaderContract
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => $this->url]);
+        $this->client = new Client(['base_uri' => $this->urls['app']]);
     }
 
     /**
@@ -49,5 +49,17 @@ abstract class MangaReader implements MangaReaderContract
         $contents = $response->getBody()->getContents();
         
         return $contents;
+    }
+
+    /**
+     * Send a request
+     *
+     * @param string $method
+     * @param string $url
+     * @param array $data
+     */
+    public function requestMobile($method, $url, $data)
+    {
+        return $this->request($method, $this->urls['mobile'].$url, $data);
     }
 }

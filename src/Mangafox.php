@@ -10,7 +10,10 @@ class Mangafox extends MangaReader
      *
      * @var string
      */
-    protected $url = 'http://mangafox.la/';
+    protected $urls = [
+        'app' => 'http://mangafox.la/',
+        'mobile' => 'http://m.mangafox.la/'
+    ];
 
     /**
      * List of genres available on mangafox
@@ -101,17 +104,6 @@ class Mangafox extends MangaReader
         return (new MangafoxScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
     }
 
-    /**
-     * Request all scans for a chapter
-     *
-     * @param string $url
-     *
-     * @return MangafoxScanBuilder
-     */
-    public function scanByUrl($url)
-    {
-        return (new MangafoxScanBuilder($this))->url($url);
-    }
 
     /**
      * Perform a search in last releases

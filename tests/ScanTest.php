@@ -23,23 +23,18 @@ class ScanTest extends TestCase
         $this->manager = new Mangafox();
     }
 
-    /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxScanBuilderInvalidUrlException
-     */
-    public function testMangafoxScanBuilderInvalidUrlException()
-    {
-        $manga = $this->manager->scanByUrl("wrong")->get();
-    }
-
     public function testBasics()
     {
 
-        $manga = $this->manager->resource('one_piece')->get();
+        $manga = $this->manager->resource('fairy_tail')->get();
 
-        $chapter = $manga->volumes->first()->chapters->first();
 
-        $scans = $this->manager->scanByUrl($chapter->url)->get();
-        $scans = $this->manager->scan($manga->uid, $chapter->volume, $chapter->number)->get();
+        $chapter = $manga->volumes->first()->chapters[0];
+
+        $this->manager->scan($manga->uid, $chapter->volume, $chapter->number)->get()->each(function($scan) {
+            file_get_contents($scan->scan);
+        });
+
 
 
     }

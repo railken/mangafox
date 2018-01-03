@@ -36,14 +36,12 @@ class MangafoxScanParser
     {
         $node = HtmlPageCrawler::create($html);
 
-        $bag = new Bag();
+        return new Collection($node->filter("#viewer img")->each(function ($node) {
+            $bag = new Bag();
 
-        $bag
-            ->set('scan', $node->filter('#image')->attr('src'))
-            ->set('next', $node->filter('a.next_page')->attr('href'))
-            ;
+            $bag->set('scan', $node->attr('data-original'));
+            return $bag;
+        }));
 
-
-        return $bag;
     }
 }
