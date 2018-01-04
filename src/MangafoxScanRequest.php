@@ -34,8 +34,12 @@ class MangafoxScanRequest
     public function send(MangafoxScanBuilder $builder)
     {
         
-        $url = "/roll_manga/{$builder->getMangaUid()}/v{$builder->getVolumeNumber()}/c{$builder->getChapterNumber()}";
+        $volume = $builder->getVolumeNumber() !== "-1" ? "/v{$builder->getVolumeNumber()}" : "";
 
+        $chapter = "/c".str_pad($builder->getChapterNumber(), 3, '0', STR_PAD_LEFT);
+
+        $url = "/roll_manga/{$builder->getMangaUid()}{$volume}{$chapter}";
+        
         $results = $this->manager->requestMobile("GET", $url, []);
         
         $parser = new MangafoxScanParser($this->manager);
