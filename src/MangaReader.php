@@ -27,7 +27,7 @@ abstract class MangaReader implements MangaReaderContract
      * @param string $url
      * @param array $data
      */
-    public function request($method, $url, $data)
+    public function request($method, $url, $data, $retry = 1)
     {
         $params = [];
         $params['http_errors'] = false;
@@ -42,11 +42,16 @@ abstract class MangaReader implements MangaReaderContract
                 $params['query'] = $data;
             break;
         }
-
-
+        
         $response = $this->client->request($method, $url, $params);
 
         $contents = $response->getBody()->getContents();
+
+        if ($response->getStatusCode() != "200" and $retry > 0) {
+
+            return $this->request($method, $url, $data, $retry-1);
+        }
+
         
         return $contents;
     }
