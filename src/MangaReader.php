@@ -42,16 +42,25 @@ abstract class MangaReader implements MangaReaderContract
                 $params['query'] = $data;
             break;
         }
+
         
         $response = $this->client->request($method, $url, $params);
 
         $contents = $response->getBody()->getContents();
 
-        if ($response->getStatusCode() != "200" and $retry > 0) {
+
+        if ($response->getStatusCode() == "502" and $retry > 0) {
+
+            sleep(10);
 
             return $this->request($method, $url, $data, $retry-1);
         }
 
+
+        if ($response->getStatusCode() != "200" and $retry > 0) {
+
+            return $this->request($method, $url, $data, $retry-1);
+        }
         
         return $contents;
     }
