@@ -5,7 +5,7 @@ use Railken\Mangafox\Mangafox;
 
 use Railken\Mangafox\Exceptions as Exceptions;
 
-class LatestUpdateTest extends TestCase
+class ReleasesTest extends TestCase
 {
 
     /**
