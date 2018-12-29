@@ -2,20 +2,15 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-use Illuminate\Support\Collection;
-use Railken\Bag;
-
 class MangafoxIndexBuilder
 {
-
     /**
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -25,7 +20,7 @@ class MangafoxIndexBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

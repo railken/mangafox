@@ -4,19 +4,18 @@ namespace Railken\Mangafox;
 
 class Mangafox extends MangaReader
 {
-
     /**
-     * Base url mangafox
+     * Base url mangafox.
      *
      * @var string
      */
     protected $urls = [
-        'app' => 'http://mangafox.la/',
-        'mobile' => 'http://m.mangafox.la/'
+        'app'    => 'http://mangafox.la/',
+        'mobile' => 'http://m.mangafox.la/',
     ];
 
     /**
-     * List of genres available on mangafox
+     * List of genres available on mangafox.
      *
      * @var string[]
      */
@@ -55,11 +54,11 @@ class Mangafox extends MangaReader
         'Tragedy',
         'Webtoons',
         'Yaoi',
-        'Yuri'
+        'Yuri',
     ];
 
     /**
-     * Retrieve base url
+     * Retrieve base url.
      *
      * @return string
      */
@@ -69,7 +68,7 @@ class Mangafox extends MangaReader
     }
 
     /**
-     * Perform a search
+     * Perform a search.
      *
      * @return MangafoxSearchBuilder
      */
@@ -79,7 +78,7 @@ class Mangafox extends MangaReader
     }
 
     /**
-     * Request a specific resource
+     * Request a specific resource.
      *
      * @param string $uid
      *
@@ -91,7 +90,7 @@ class Mangafox extends MangaReader
     }
 
     /**
-     * Request all scans for a chapter
+     * Request all scans for a chapter.
      *
      * @param string $manga_uid
      * @param string $volume_number
@@ -104,9 +103,8 @@ class Mangafox extends MangaReader
         return (new MangafoxScanBuilder($this))->mangaUid($manga_uid)->volumeNumber($volume_number)->chapterNumber($chapter_number);
     }
 
-
     /**
-     * Perform a search in last releases
+     * Perform a search in last releases.
      *
      * @return MangafoxReleasesBuilder
      */
@@ -116,7 +114,7 @@ class Mangafox extends MangaReader
     }
 
     /**
-     * Perform a search in directory
+     * Perform a search in directory.
      *
      * @return MangafoxDirectoryBuilder
      */
@@ -125,9 +123,8 @@ class Mangafox extends MangaReader
         return new MangafoxDirectoryBuilder($this);
     }
 
-
     /**
-     * Retrieve a list of all resources
+     * Retrieve a list of all resources.
      *
      * @return MangafoxIndexBuilder
      */
@@ -135,8 +132,9 @@ class Mangafox extends MangaReader
     {
         return new MangafoxIndexBuilder($this);
     }
+
     /**
-     * Retrieve genres available on mangafox
+     * Retrieve genres available on mangafox.
      *
      * @return array
      */

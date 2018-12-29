@@ -2,18 +2,15 @@
 
 namespace Railken\Mangafox;
 
-use Illuminate\Support\Collection;
-
 class MangafoxReleasesRequest
 {
-    
     /*
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mangafox $manager
      */
@@ -23,7 +20,7 @@ class MangafoxReleasesRequest
     }
 
     /**
-     * Send the request for the reReleases
+     * Send the request for the reReleases.
      *
      * @param MangafoxReleasesBuilder $builder
      *
@@ -31,7 +28,7 @@ class MangafoxReleasesRequest
      */
     public function send(MangafoxReleasesBuilder $builder)
     {
-        $results = $this->manager->request("GET", "/releases/{$builder->getPage()}.htm", []);
+        $results = $this->manager->request('GET', "/releases/{$builder->getPage()}.htm", []);
 
         $parser = new MangafoxReleasesParser($this->manager);
 

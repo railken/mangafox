@@ -3,18 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Mangafox\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-
 class IndexTest extends TestCase
 {
-
     /**
      * @var Railken\Mangafox\Mangafox
      */
     private $manager;
 
     /**
-     * Called on setup
+     * Called on setup.
      *
      * @return void
      */
@@ -23,13 +20,10 @@ class IndexTest extends TestCase
         $this->manager = new Mangafox();
     }
 
-
     public function testBasics()
     {
         $results = $this->manager
             ->index()
             ->get();
-
-
     }
 }

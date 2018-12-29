@@ -6,6 +6,5 @@ class MangafoxResourceParserInvalidUrlException extends MangafoxException
 {
     public function __construct()
     {
-    	
     }
 }

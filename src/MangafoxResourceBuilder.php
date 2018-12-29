@@ -2,12 +2,8 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-use Illuminate\Support\Collection;
-
 class MangafoxResourceBuilder
 {
-
     /**
      * @var Mangafox
      */
@@ -19,7 +15,7 @@ class MangafoxResourceBuilder
     protected $uid;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -29,7 +25,7 @@ class MangafoxResourceBuilder
     }
 
     /**
-     * The uid 
+     * The uid.
      *
      * @param string $uid
      *
@@ -43,7 +39,7 @@ class MangafoxResourceBuilder
     }
 
     /**
-     * Return uid
+     * Return uid.
      *
      * @return string
      */
@@ -53,7 +49,7 @@ class MangafoxResourceBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

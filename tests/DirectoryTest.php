@@ -3,18 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Mangafox\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-
 class DirectoryTest extends TestCase
 {
-
     /**
      * @var Railken\Mangafox\Mangafox
      */
     private $manager;
 
     /**
-     * Called on setup
+     * Called on setup.
      *
      * @return void
      */
@@ -24,7 +21,7 @@ class DirectoryTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidSortByValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidSortByValueException
      */
     public function testMangafoxDirectoryBuilderInvalidSortByValueException()
     {
@@ -32,7 +29,7 @@ class DirectoryTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByFilterException
      */
     public function testMangafoxDirectoryBuilderInvalidBrowseByFilterException()
     {
@@ -40,21 +37,23 @@ class DirectoryTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenreValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenreValueException
      */
     public function testMangafoxDirectoryBuilderInvalidBrowseByGenreValueException()
     {
         $this->manager->directory()->browseBy('genre', 'wrong');
     }
+
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByStatusValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByStatusValueException
      */
     public function testMangafoxDirectoryBuilderInvalidBrowseByStatusValueException()
     {
         $this->manager->directory()->browseBy('status', 'wrong');
     }
+
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByReleasedYearValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByReleasedYearValueException
      */
     public function testMangafoxDirectoryBuilderInvalidBrowseByReleasedYearValueException()
     {
@@ -62,23 +61,20 @@ class DirectoryTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByInitialValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxDirectoryBuilderInvalidBrowseByInitialValueException
      */
     public function testMangafoxDirectoryBuilderInvalidBrowseByInitialValueException()
     {
         $this->manager->directory()->browseBy('initial', 'wrong');
     }
 
-
     public function testBasics()
     {
         $results = $this->manager
             ->directory()
             ->browseBy('genre', 'Action')
-            ->sortBy('name') 
+            ->sortBy('name')
             ->page(1)
             ->get();
-
-
     }
 }

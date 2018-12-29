@@ -2,18 +2,15 @@
 
 namespace Railken\Mangafox;
 
-use Illuminate\Support\Collection;
-
 class MangafoxIndexRequest
 {
-    
     /*
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mangafox $manager
      */
@@ -22,9 +19,8 @@ class MangafoxIndexRequest
         $this->manager = $manager;
     }
 
-
     /**
-     * Send the request
+     * Send the request.
      *
      * @param MangafoxIndexBuilder $builder
      *
@@ -32,8 +28,7 @@ class MangafoxIndexRequest
      */
     public function send(MangafoxIndexBuilder $builder)
     {
-
-        $results = $this->manager->request("GET", "/manga/", []);
+        $results = $this->manager->request('GET', '/manga/', []);
 
         $parser = new MangafoxIndexParser($this->manager);
 

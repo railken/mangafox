@@ -2,17 +2,12 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-use Illuminate\Support\Collection;
-
 class MangafoxScanBuilder
 {
-
     /**
      * @var Mangafox
      */
     protected $manager;
-
 
     /**
      * @var string
@@ -30,7 +25,7 @@ class MangafoxScanBuilder
     protected $volume_number;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -40,7 +35,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * manga_uid
+     * manga_uid.
      *
      * @param string $manga_uid
      *
@@ -54,7 +49,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * Return manga_uid
+     * Return manga_uid.
      *
      * @return string
      */
@@ -64,7 +59,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * volume_number
+     * volume_number.
      *
      * @param string $volume_number
      *
@@ -78,7 +73,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * Return volume_number
+     * Return volume_number.
      *
      * @return string
      */
@@ -87,9 +82,8 @@ class MangafoxScanBuilder
         return $this->volume_number;
     }
 
-
     /**
-     * chapter_number
+     * chapter_number.
      *
      * @param string $chapter_number
      *
@@ -103,7 +97,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * Return chapter_number
+     * Return chapter_number.
      *
      * @return string
      */
@@ -113,7 +107,7 @@ class MangafoxScanBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

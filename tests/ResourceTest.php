@@ -3,18 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Mangafox\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-
 class ResourceTest extends TestCase
 {
-
     /**
      * @var Railken\Mangafox\Mangafox
      */
     private $manager;
 
     /**
-     * Called on setup
+     * Called on setup.
      *
      * @return void
      */
@@ -24,7 +21,7 @@ class ResourceTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxResourceRequestNotFoundException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxResourceRequestNotFoundException
      */
     public function testMangafoxResourceRequestNotFoundException()
     {
@@ -33,11 +30,8 @@ class ResourceTest extends TestCase
 
     public function testBasics()
     {
-      
-        $manga = $this->manager->resource('one_piece')->get();
+        $manga = $this->manager->resource('fairy_tail')->get();
 
-        $this->assertEquals('one_piece', $manga->uid);
-
-
+        $this->assertEquals('fairy_tail', $manga->uid);
     }
 }

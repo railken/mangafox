@@ -6,14 +6,13 @@ use GuzzleHttp\Client;
 
 abstract class MangaReader implements MangaReaderContract
 {
-
     /**
      * @var GuzzleHttp\Client
      */
     protected $client;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -21,11 +20,11 @@ abstract class MangaReader implements MangaReaderContract
     }
 
     /**
-     * Send a request
+     * Send a request.
      *
      * @param string $method
      * @param string $url
-     * @param array $data
+     * @param array  $data
      */
     public function request($method, $url, $data, $retry = 1)
     {
@@ -43,34 +42,29 @@ abstract class MangaReader implements MangaReaderContract
             break;
         }
 
-        
         $response = $this->client->request($method, $url, $params);
 
         $contents = $response->getBody()->getContents();
 
-
-        if ($response->getStatusCode() == "502" and $retry > 0) {
-
+        if ($response->getStatusCode() == '502' and $retry > 0) {
             sleep(10);
 
-            return $this->request($method, $url, $data, $retry-1);
+            return $this->request($method, $url, $data, $retry - 1);
         }
 
-
-        if ($response->getStatusCode() != "200" and $retry > 0) {
-
-            return $this->request($method, $url, $data, $retry-1);
+        if ($response->getStatusCode() != '200' and $retry > 0) {
+            return $this->request($method, $url, $data, $retry - 1);
         }
-        
+
         return $contents;
     }
 
     /**
-     * Send a request
+     * Send a request.
      *
      * @param string $method
      * @param string $url
-     * @param array $data
+     * @param array  $data
      */
     public function requestMobile($method, $url, $data)
     {

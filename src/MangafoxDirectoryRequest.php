@@ -2,18 +2,15 @@
 
 namespace Railken\Mangafox;
 
-use Illuminate\Support\Collection;
-
 class MangafoxDirectoryRequest
 {
-    
     /*
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mangafox $manager
      */
@@ -23,7 +20,7 @@ class MangafoxDirectoryRequest
     }
 
     /**
-     * Parse sort
+     * Parse sort.
      *
      * @param string $sort
      *
@@ -48,7 +45,7 @@ class MangafoxDirectoryRequest
     }
 
     /**
-     * Send the request
+     * Send the request.
      *
      * @param MangafoxDirectoryBuilder $builder
      *
@@ -64,7 +61,7 @@ class MangafoxDirectoryRequest
             $params[$sort] = '';
         }
 
-        $results = $this->manager->request("GET", "/directory/".strtolower($builder->getBrowseBy()->get('value'))."/".$builder->getPage().".htm", $params);
+        $results = $this->manager->request('GET', '/directory/'.strtolower($builder->getBrowseBy()->get('value')).'/'.$builder->getPage().'.htm', $params);
 
         $parser = new MangafoxDirectoryParser($this->manager);
 

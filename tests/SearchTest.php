@@ -3,18 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use Railken\Mangafox\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-
 class SearchTest extends TestCase
 {
-
     /**
      * @var Railken\Mangafox\Mangafox
      */
     private $manager;
 
     /**
-     * Called on setup
+     * Called on setup.
      *
      * @return void
      */
@@ -24,7 +21,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidTypeException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidTypeException
      */
     public function testMangafoxSearchBuilderInvalidTypeException()
     {
@@ -32,7 +29,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidNameFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidNameFilterException
      */
     public function testMangafoxSearchBuilderInvalidNameFilterException()
     {
@@ -40,7 +37,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidAuthorFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidAuthorFilterException
      */
     public function testMangafoxSearchBuilderInvalidAuthorFilterException2()
     {
@@ -48,7 +45,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidArtistFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidArtistFilterException
      */
     public function testMangafoxSearchBuilderInvalidArtistFilterException3()
     {
@@ -56,7 +53,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidGenresFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidGenresFilterException
      */
     public function testMangafoxSearchBuilderInvalidGenresFilterException()
     {
@@ -64,7 +61,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidGenresValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidGenresValueException
      */
     public function testMangafoxSearchBuilderInvalidGenresValueException()
     {
@@ -72,7 +69,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException
      */
     public function testMangafoxSearchBuilderInvalidSortByDirectionException()
     {
@@ -80,16 +77,15 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidSortByValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidSortByValueException
      */
     public function testMangafoxSearchBuilderInvalidSortByValueException()
     {
         $this->manager->search()->sortBy('wrong', 'asc');
     }
 
-
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidReleasedYearFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidReleasedYearFilterException
      */
     public function testMangafoxSearchBuilderInvalidReleasedYearFilterException()
     {
@@ -97,7 +93,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidReleasedYearValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidReleasedYearValueException
      */
     public function testMangafoxSearchBuilderInvalidReleasedYearValueException()
     {
@@ -105,7 +101,7 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidRatingFilterException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidRatingFilterException
      */
     public function testMangafoxSearchBuilderInvalidRatingFilterException()
     {
@@ -113,16 +109,15 @@ class SearchTest extends TestCase
     }
 
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidRatingValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidRatingValueException
      */
     public function testMangafoxSearchBuilderInvalidRatingValueException()
     {
         $this->manager->search()->rating('<', 'wrong');
     }
 
-
     /**
-     * @expectedException Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidCompletedValueException
+     * @expectedException \Railken\Mangafox\Exceptions\MangafoxSearchBuilderInvalidCompletedValueException
      */
     public function testMangafoxSearchBuilderInvalidCompletedValueException()
     {
@@ -131,12 +126,9 @@ class SearchTest extends TestCase
 
     public function testBasics()
     {
-       
-
         $m = $this->manager;
 
-
-        # Search manga
+        // Search manga
         $results = $m
             ->search()
             ->type('any')
@@ -152,18 +144,16 @@ class SearchTest extends TestCase
             ->get();
 
         $results = $results->results;
-        
-        $manga = $results->filter(function($v) {
+
+        $manga = $results->filter(function ($v) {
             return $v->uid == 'one_piece';
         })->first();
 
         $this->assertEquals(106, $manga->id);
 
-
         // Send an empty request
         $results = $m
             ->search()
             ->get();
-
     }
 }

@@ -2,88 +2,87 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
 use Illuminate\Support\Collection;
 use Railken\Bag;
+use Railken\Mangafox\Exceptions as Exceptions;
 
 class MangafoxSearchBuilder
 {
-
     /**
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * The type of manga: "any"|"manga"|"chinese"|"korean"
+     * The type of manga: "any"|"manga"|"chinese"|"korean".
      *
      * @var string
      */
     protected $type;
 
     /**
-     * Name of resource searched
+     * Name of resource searched.
      *
      * @var Bag
      */
     protected $name;
 
     /**
-     * Name of artist searched
+     * Name of artist searched.
      *
      * @var Bag
      */
     protected $artist;
 
     /**
-     * Name of author searched
+     * Name of author searched.
      *
      * @var Bag
      */
     protected $author;
 
     /**
-     * Sort By
+     * Sort By.
      *
      * @var Bag
      */
     protected $sort_by;
 
     /**
-     * Genres
+     * Genres.
      *
      * @var Bag
      */
     protected $genres;
 
     /**
-     * Released year
+     * Released year.
      *
      * @var Bag
      */
     protected $released_year;
 
     /**
-     * Rating
+     * Rating.
      *
      * @var Bag
      */
     protected $rating;
 
     /**
-     * Completed
+     * Completed.
      *
-     * @var boolean
+     * @var bool
      */
     protected $completed = null;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $page = 1;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -101,7 +100,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * The page 
+     * The page.
      *
      * @param string $page
      *
@@ -110,12 +109,12 @@ class MangafoxSearchBuilder
     public function page($page)
     {
         $this->page = $page;
-        
+
         return $this;
     }
 
     /**
-     * Return page
+     * Return page.
      *
      * @return string
      */
@@ -123,15 +122,13 @@ class MangafoxSearchBuilder
     {
         return $this->page;
     }
-    
+
     /**
-     * Throw an exceptions if value doesn't match with suggestion
+     * Throw an exceptions if value doesn't match with suggestion.
      *
-     * @param string $class 
-     * @param mixed $value
-     * @param array $suggestions
-     *
-     * @return void
+     * @param string $class
+     * @param mixed  $value
+     * @param array  $suggestions
      */
     public function throwExceptionInvalidValue($class, $value, $suggestions)
     {
@@ -146,24 +143,8 @@ class MangafoxSearchBuilder
         }
     }
 
-
-
-    /** 
-      * Set common filter for "contains"|"begin"|"end" for name, author and artist
-      *
-      * @param string $class
-      * @param string $method
-      * @param string $value
-      *
-      * @return void
-      */
-    private function throwExceptionInvalidFilter($class, $value)
-    {
-        return $this->throwExceptionInvalidValue($class, $value, ['contains', 'begin', 'end']);
-    }
-
     /**
-     * The type of manga: "any"|"manga"|"chinese"|"korean"
+     * The type of manga: "any"|"manga"|"chinese"|"korean".
      *
      * @param string $type
      *
@@ -179,7 +160,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Return type
+     * Return type.
      *
      * @return string
      */
@@ -189,7 +170,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Set the name of resource searched
+     * Set the name of resource searched.
      *
      * @param string $filter
      * @param string $name
@@ -203,13 +184,12 @@ class MangafoxSearchBuilder
         $this->name
             ->set('value', $name)
             ->set('filter', $filter);
-        
+
         return $this;
     }
 
-
     /**
-     * Retrieve name
+     * Retrieve name.
      *
      * @return string
      */
@@ -219,7 +199,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Set the author of resource searched
+     * Set the author of resource searched.
      *
      * @param string $filter
      * @param string $author
@@ -229,16 +209,16 @@ class MangafoxSearchBuilder
     public function author($filter, $author)
     {
         $this->throwExceptionInvalidFilter(Exceptions\MangafoxSearchBuilderInvalidAuthorFilterException::class, $filter);
-        
+
         $this->author
             ->set('value', $author)
             ->set('filter', $filter);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve author
+     * Retrieve author.
      *
      * @return string
      */
@@ -247,9 +227,8 @@ class MangafoxSearchBuilder
         return $this->author;
     }
 
-
     /**
-     * Set the artist of resource searched
+     * Set the artist of resource searched.
      *
      * @param string $filter
      * @param string $artist
@@ -260,16 +239,15 @@ class MangafoxSearchBuilder
     {
         $this->throwExceptionInvalidFilter(Exceptions\MangafoxSearchBuilderInvalidArtistFilterException::class, $filter);
 
-        
         $this->artist
             ->set('value', $artist)
             ->set('filter', $filter);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve artist
+     * Retrieve artist.
      *
      * @return string
      */
@@ -278,10 +256,8 @@ class MangafoxSearchBuilder
         return $this->artist;
     }
 
-
-
     /**
-     * Set the sort of resource searched
+     * Set the sort of resource searched.
      *
      * @param string $filter
      * @param string $sort
@@ -291,19 +267,19 @@ class MangafoxSearchBuilder
     public function sortBy($value, $direction)
     {
         $direction = strtolower($direction);
-        
+
         $this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByValueException::class, $value, ['name', 'rating', 'views', 'chapters', 'latest_chapter']);
         $this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidSortByDirectionException::class, $direction, ['asc', 'desc']);
-        
+
         $this->sort_by
             ->set('field', $value)
             ->set('direction', $direction);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -313,10 +289,10 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Set genres
+     * Set genres.
      *
      * @param string $filter
-     * @param array $genres
+     * @param array  $genres
      */
     public function genres($filter, $genres)
     {
@@ -331,7 +307,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Retrieve genres
+     * Retrieve genres.
      *
      * @return Bag
      */
@@ -341,7 +317,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Set the sort of resource searched
+     * Set the sort of resource searched.
      *
      * @param string $filter
      * @param string $sort
@@ -352,19 +328,19 @@ class MangafoxSearchBuilder
     {
         $this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidReleasedYearFilterException::class, $filter, ['<', '=', '>']);
 
-        if (!checkdate(1, 1, (int)$value)) {
+        if (!checkdate(1, 1, (int) $value)) {
             throw new Exceptions\MangafoxSearchBuilderInvalidReleasedYearValueException($value);
         }
 
         $this->released_year
             ->set('filter', $filter)
             ->set('value', $value);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -373,9 +349,8 @@ class MangafoxSearchBuilder
         return $this->released_year;
     }
 
-
     /**
-     * Set the sort of resource searched
+     * Set the sort of resource searched.
      *
      * @param string $filter
      * @param string $sort
@@ -390,12 +365,12 @@ class MangafoxSearchBuilder
         $this->rating
             ->set('filter', $filter)
             ->set('value', $value);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -405,7 +380,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Set the sort of resource searched
+     * Set the sort of resource searched.
      *
      * @param string $value
      *
@@ -415,13 +390,13 @@ class MangafoxSearchBuilder
     {
         $this->throwExceptionInvalidValue(Exceptions\MangafoxSearchBuilderInvalidCompletedValueException::class, $value, [null, '1', '0']);
 
-        $this->completed = (boolean)$value;
-        
+        $this->completed = (bool) $value;
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -431,7 +406,7 @@ class MangafoxSearchBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */
@@ -440,5 +415,17 @@ class MangafoxSearchBuilder
         $request = new MangafoxSearchRequest($this->manager);
 
         return $request->send($this);
+    }
+
+    /**
+     * Set common filter for "contains"|"begin"|"end" for name, author and artist.
+     *
+     * @param string $class
+     * @param string $method
+     * @param string $value
+     */
+    private function throwExceptionInvalidFilter($class, $value)
+    {
+        return $this->throwExceptionInvalidValue($class, $value, ['contains', 'begin', 'end']);
     }
 }

@@ -2,20 +2,19 @@
 
 namespace Railken\Mangafox;
 
-use \Wa72\HtmlPageDom\HtmlPageCrawler;
 use Illuminate\Support\Collection;
 use Railken\Bag;
+use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class MangafoxIndexParser
-{    
-
-	/*
+{
+    /*
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mangafox $manager
      */
@@ -25,10 +24,9 @@ class MangafoxIndexParser
     }
 
     /**
-     * Parse the response
+     * Parse the response.
      *
-     * @return string $html
-     *
+     * @return string                 $html
      * @return MangafoxSearchResponse
      */
     public function parse($html)
@@ -46,11 +44,10 @@ class MangafoxIndexParser
                 ->set('id', $title->attr('rel'))
                 ->set('uid', basename($title->attr('href')))
                 ->set('name', $title->html())
-                ->set('url', "http:".$title->attr('href'))
+                ->set('url', 'http:'.$title->attr('href'))
                 ;
         })));
-        
+
         return $bag;
     }
-	
 }

@@ -2,41 +2,39 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-use Illuminate\Support\Collection;
 use Railken\Bag;
+use Railken\Mangafox\Exceptions as Exceptions;
 
 class MangafoxDirectoryBuilder
 {
-
     /**
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Page
+     * Page.
      *
      * @var string
      */
     protected $page = 1;
 
     /**
-     * Sort By
+     * Sort By.
      *
      * @var Bag
      */
     protected $sort_by;
 
     /**
-     * Genres
+     * Genres.
      *
      * @var Bag
      */
     protected $browse_by;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -48,13 +46,11 @@ class MangafoxDirectoryBuilder
     }
 
     /**
-     * Throw an exceptions if value doesn't match with suggestion
+     * Throw an exceptions if value doesn't match with suggestion.
      *
-     * @param string $class 
-     * @param mixed $value
-     * @param array $suggestions
-     *
-     * @return void
+     * @param string $class
+     * @param mixed  $value
+     * @param array  $suggestions
      */
     public function throwExceptionInvalidValue($class, $value, $suggestions)
     {
@@ -69,9 +65,8 @@ class MangafoxDirectoryBuilder
         }
     }
 
-
     /**
-     * Sorts
+     * Sorts.
      *
      * @param string $value
      *
@@ -80,15 +75,15 @@ class MangafoxDirectoryBuilder
     public function sortBy($value)
     {
         $this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidSortByValueException::class, $value, ['name', 'popularity', 'rating', 'latest_chapter']);
-        
+
         $this->sort_by
             ->set('field', $value);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -98,7 +93,7 @@ class MangafoxDirectoryBuilder
     }
 
     /**
-     * Browse by
+     * Browse by.
      *
      * @param string $filter
      * @param string $value
@@ -110,9 +105,8 @@ class MangafoxDirectoryBuilder
         $this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByFilterException::class, $filter, ['genre', 'initial', 'released_year', 'status']);
 
         switch ($filter) {
-
             case 'genre':
-                $this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenreValueException::class, $value, array_merge(["All"], $this->manager->getGenres()));
+                $this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByGenreValueException::class, $value, array_merge(['All'], $this->manager->getGenres()));
             break;
 
             case 'initial':
@@ -121,7 +115,7 @@ class MangafoxDirectoryBuilder
 
             case 'released_year':
 
-                if ($value != "older" && !checkdate(1, 1, (int)$value)) {
+                if ($value != 'older' && !checkdate(1, 1, (int) $value)) {
                     throw new Exceptions\MangafoxDirectoryBuilderInvalidBrowseByReleasedYearValueException($value);
                 }
 
@@ -131,16 +125,16 @@ class MangafoxDirectoryBuilder
                 $this->throwExceptionInvalidValue(Exceptions\MangafoxDirectoryBuilderInvalidBrowseByStatusValueException::class, $value, ['New', 'Updated', 'Completed', 'Ongoing']);
             break;
         }
-        
+
         $this->browse_by
             ->set('filter', $filter)
             ->set('value', $value);
-        
+
         return $this;
     }
 
     /**
-     * Retrieve sort
+     * Retrieve sort.
      *
      * @return string
      */
@@ -150,7 +144,7 @@ class MangafoxDirectoryBuilder
     }
 
     /**
-     * The page 
+     * The page.
      *
      * @param string $page
      *
@@ -159,12 +153,12 @@ class MangafoxDirectoryBuilder
     public function page($page)
     {
         $this->page = $page;
-        
+
         return $this;
     }
 
     /**
-     * Return page
+     * Return page.
      *
      * @return string
      */
@@ -174,7 +168,7 @@ class MangafoxDirectoryBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */

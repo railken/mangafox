@@ -2,20 +2,17 @@
 
 namespace Railken\Mangafox;
 
-use Illuminate\Support\Collection;
-
 use Railken\Mangafox\Exceptions as Exceptions;
 
 class MangafoxResourceRequest
 {
-    
     /*
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mangafox $manager
      */
@@ -25,7 +22,7 @@ class MangafoxResourceRequest
     }
 
     /**
-     * Send the request for the research
+     * Send the request for the research.
      *
      * @param MangafoxResourceBuilder $builder
      *
@@ -33,7 +30,7 @@ class MangafoxResourceRequest
      */
     public function send(MangafoxResourceBuilder $builder)
     {
-        $results = $this->manager->request("GET", "/manga/{$builder->getUid()}", []);
+        $results = $this->manager->request('GET', "/manga/{$builder->getUid()}", []);
 
         $parser = new MangafoxResourceParser($this->manager);
 

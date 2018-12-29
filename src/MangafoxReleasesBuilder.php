@@ -2,24 +2,20 @@
 
 namespace Railken\Mangafox;
 
-use Railken\Mangafox\Exceptions as Exceptions;
-use Illuminate\Support\Collection;
-
 class MangafoxReleasesBuilder
 {
-
     /**
      * @var Mangafox
      */
     protected $manager;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $page = 1;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Mangafox $manager
      */
@@ -29,7 +25,7 @@ class MangafoxReleasesBuilder
     }
 
     /**
-     * The page 
+     * The page.
      *
      * @param string $page
      *
@@ -38,12 +34,12 @@ class MangafoxReleasesBuilder
     public function page($page)
     {
         $this->page = $page;
-        
+
         return $this;
     }
 
     /**
-     * Return page
+     * Return page.
      *
      * @return string
      */
@@ -53,7 +49,7 @@ class MangafoxReleasesBuilder
     }
 
     /**
-     * Send request
+     * Send request.
      *
      * @return Response
      */
