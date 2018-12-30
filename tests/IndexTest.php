@@ -12,15 +12,13 @@ class IndexTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
         $this->manager = new Mangafox();
     }
 
-    public function testBasics()
+    public function testIndexBase()
     {
         $results = $this->manager
             ->index()

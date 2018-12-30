@@ -12,15 +12,13 @@ class ReleasesTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
         $this->manager = new Mangafox();
     }
 
-    public function testBasics()
+    public function testReleasesBase()
     {
         $results = $this->manager->releases()->page(1)->get();
     }

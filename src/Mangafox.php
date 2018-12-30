@@ -10,8 +10,8 @@ class Mangafox extends MangaReader
      * @var string
      */
     protected $urls = [
-        'app'    => 'http://mangafox.la/',
-        'mobile' => 'http://m.mangafox.la/',
+        'app'    => 'https://fanfox.net',
+        'mobile' => 'https://m.fanfox.net',
     ];
 
     /**
@@ -65,6 +65,18 @@ class Mangafox extends MangaReader
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Retrieve base url.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function getAppUrl($path)
+    {
+        return $this->urls['app'].$path;
     }
 
     /**

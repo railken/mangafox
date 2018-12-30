@@ -12,19 +12,17 @@ class ScanTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
         $this->manager = new Mangafox();
     }
 
-    public function testBasics()
+    public function testScanBasics()
     {
         $manga = $this->manager->resource('fairy_tail')->get();
 
-        $chapter = $manga->volumes->first()->chapters[0];
+        $chapter = $manga->chapters[0];
 
         $this->manager->scan($manga->uid, $chapter->volume, $chapter->number)->get()->each(function ($scan) {
             file_get_contents($scan->scan);

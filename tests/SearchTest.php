@@ -12,8 +12,6 @@ class SearchTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -124,12 +122,12 @@ class SearchTest extends TestCase
         $this->manager->search()->completed('wrong');
     }
 
-    public function testBasics()
+    public function testSearchBase()
     {
         $m = $this->manager;
 
         // Search manga
-        $results = $m
+        $result = $m
             ->search()
             ->type('any')
             ->name('contains', 'One Piece')
@@ -143,13 +141,13 @@ class SearchTest extends TestCase
             ->sortBy('name', 'ASC')
             ->get();
 
-        $results = $results->results;
+        $results = $result->results;
 
         $manga = $results->filter(function ($v) {
             return $v->uid == 'one_piece';
         })->first();
 
-        $this->assertEquals(106, $manga->id);
+        $this->assertEquals('One Piece', $manga->name);
 
         // Send an empty request
         $results = $m

@@ -39,46 +39,37 @@ class MangafoxResourceParser
         $head = $node->filter('head');
         $title = $node->filter('div#title');
 
-        if (!$head->filter("[property='og:url']")->getNode(0)) {
+        if (strpos($head->filter("[name='og:url']")->attr('content'), 'http://mangafox.me/manga/') === false) {
             throw new Exceptions\MangafoxResourceParserInvalidUrlException();
         }
 
         $bag = new Bag();
         $bag
-            ->set('url', $head->filter("[property='og:url']")->attr('content'))
+            ->set('url', $this->manager->getAppUrl('/manga/'.basename($head->filter("[name='og:url']")->attr('content'))))
             ->set('uid', basename($bag->get('url')))
-            ->set('name', $node->filter('.cover > img')->attr('alt'))
-            ->set('cover', $node->filter('.cover > img')->attr('src'))
-            ->set('description', $head->filter("[property='og:description']")->count() ? $head->filter("[property='og:description']")->attr('content') : null)
-            ->set('aliases', explode('; ', $title->filter('h3')->text()))
-            ->set('released_year', $title->filter("[valign='top']:nth-child(1) > a")->html())
-            ->set('author', $title->filter("[valign='top']:nth-child(2) > a")->html())
-            ->set('artist', $title->filter("[valign='top']:nth-child(3) > a")->html())
-            ->set('genres', explode(', ', trim($title->filter("[valign='top']:nth-child(4)")->text())))
-            ->set('status', strtolower(explode(',', trim($node->filter('#series_info .data > span')->getNode(0)->textContent))[0]))
-            ->set('volumes', new Collection($node->filter('ul.chlist')->each(function ($node) {
-                $chapters = $node->filter('li')->each(function ($node) {
-                    $bag = new Bag();
-                    $bag->set('url', 'http:'.$node->filter('a.tips')->attr('href'));
-                    $bag->set('title', $node->filter('span.title')->text());
-                    $bag->set('released_at', $this->parseDate($node->filter('span.date')->text()));
-
-                    $number = floatval(preg_replace('/[c]/', '', basename(dirname($bag->get('url')))));
-                    $volume = basename(dirname(dirname($bag->get('url'))));
-
-                    $volume = preg_match('/^v([0-9]*)$/', $volume) || $volume == 'vTBD'
-                        ? preg_replace('/[v]/', '', $volume)
-                        : -1;
-
-                    $bag->set('volume', $volume);
-                    $bag->set('number', $number);
-
-                    return $bag;
-                });
-
+            ->set('name', $node->filter('.detail-info-cover-img')->attr('alt'))
+            ->set('cover', $node->filter('.detail-info-cover-img')->attr('src'))
+            ->set('description', $node->filter('.fullcontent')->text())
+            ->set('author', $node->filter('.detail-info-right-say > a')->text())
+            ->set('genres', explode(' ', trim($node->filter('.detail-info-right-tag-list')->text())))
+            ->set('status', $node->filter('.detail-info-right-title .detail-info-right-title-tip')->text())
+            ->set('rating', $node->filter('.detail-info-right-title .detail-info-right-title-star .item-score')->text())
+            ->set('chapters', new Collection($node->filter('#chapterlist > #list-2 > ul > li')->each(function ($node) {
                 $bag = new Bag();
-                $bag->set('chapters', new Collection($chapters));
-                $bag->set('volume', $bag->get('chapters')->first()->get('volume'));
+
+                $bag->set('url', $this->manager->getAppUrl($node->filter('a')->attr('href')));
+                $bag->set('title', trim(explode('-', $node->filter('.title3')->text())[1]));
+                $bag->set('released_at', $this->parseDate(trim($node->filter('.title2')->text())));
+
+                $number = floatval(preg_replace('/[c]/', '', basename(dirname($bag->get('url')))));
+                $volume = basename(dirname(dirname($bag->get('url'))));
+
+                $volume = preg_match('/^v([0-9]*)$/', $volume) || $volume == 'vTBD'
+                    ? preg_replace('/[v]/', '', $volume)
+                    : -1;
+
+                $bag->set('volume', $volume);
+                $bag->set('number', $number);
 
                 return $bag;
             })))

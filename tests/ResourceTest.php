@@ -12,8 +12,6 @@ class ResourceTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -28,10 +26,15 @@ class ResourceTest extends TestCase
         $manga = $this->manager->resource('wrong')->get();
     }
 
-    public function testBasics()
+    public function testResourceBasics()
     {
         $manga = $this->manager->resource('fairy_tail')->get();
 
         $this->assertEquals('fairy_tail', $manga->uid);
+        $this->assertEquals('https://fanfox.net/manga/fairy_tail', $manga->url);
+        $this->assertEquals('Fairy Tail', $manga->name);
+        $this->assertEquals('https://s.fanfox.net/store/manga/246/cover.jpg', $manga->cover);
+        $this->assertEquals('MASHIMA Hiro', $manga->author);
+        $this->assertEquals('Completed', $manga->status);
     }
 }

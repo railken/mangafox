@@ -119,7 +119,7 @@ class MangafoxSearchRequest
 
         $params['page'] = $builder->getPage();
 
-        $results = $this->manager->request('GET', '/search.php', $params);
+        $results = $this->manager->request('GET', '/search', $params);
 
         $parser = new MangafoxSearchParser($this->manager);
 

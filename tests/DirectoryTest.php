@@ -12,8 +12,6 @@ class DirectoryTest extends TestCase
 
     /**
      * Called on setup.
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -68,13 +66,16 @@ class DirectoryTest extends TestCase
         $this->manager->directory()->browseBy('initial', 'wrong');
     }
 
-    public function testBasics()
+    public function testDirectoryBase()
     {
-        $results = $this->manager
+        $result = $this->manager
             ->directory()
             ->browseBy('genre', 'Action')
             ->sortBy('name')
-            ->page(1)
+            ->page(2)
             ->get();
+
+        $this->assertTrue($result->results->count() > 0);
+        $this->assertEquals(2, $result->page);
     }
 }

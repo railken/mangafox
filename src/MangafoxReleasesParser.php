@@ -38,29 +38,36 @@ class MangafoxReleasesParser
 
         $bag = new Bag();
 
-        $bag->set('pages', $node->filter('div#nav > ul > li:nth-child(11)')->text());
-        $bag->set('results', new Collection($node->filter('ul#updates > li')->each(function ($node) {
+        $bag->set('pages', $node->filter('.pager-list-left a:nth-last-child(2)')->text());
+        $bag->set('results', new Collection($node->filter('.manga-list-4-list > li')->each(function ($node) {
             $bag = new Bag();
 
-            $bag->set('url', 'http:'.$node->filter('.title a')->attr('href'));
-            $bag->set('name', $node->filter('.title a')->text());
-            $bag->set('uid', basename($bag->get('url')));
-            $bag->set('chapters', $node->filter('dt')->each(function ($node) {
+            $title = $node->filter('.manga-list-4-item-title > a');
+
+            $bag
+                ->set('uid', basename($title->attr('href')))
+                ->set('name', $title->html())
+                ->set('url', $this->manager->getAppUrl($title->attr('href')))
+                ->set('cover', $node->filter('img')->attr('src'))
+                ->set('updated_at', $this->parseDate($node->filter('.manga-list-4-item-subtitle > span')->text()))
+            ;
+
+            $bag->set('chapters', Collection::make($node->filter('ul.manga-list-4-item-part > li')->each(function ($node) {
                 $bag = new Bag();
 
-                $number = floatval(preg_replace('/[c]/', '', basename(dirname($bag->get('url')))));
-                $volume = basename(dirname(dirname($bag->get('url'))));
-
-                $bag->set('released_at', $this->parseDate($node->filter('em')->text()));
-                $bag->set('url', 'http:'.$node->filter('a')->attr('href'));
+                $bag->set('url', $this->manager->getAppUrl($node->filter('a')->attr('href')));
 
                 return $bag;
+            }))->filter(function ($bag) {
+                $ext = pathinfo(basename($bag->get('url')), PATHINFO_EXTENSION);
+
+                return !empty($ext);
             }));
 
             return $bag;
         })));
 
-        $bag->set('page', $node->filter('li.red')->text());
+        $bag->set('page', $node->filter('.pager-list-left .active')->text());
 
         return $bag;
     }
