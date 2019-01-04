@@ -25,7 +25,7 @@ class ScanTest extends TestCase
         $chapter = $manga->chapters[0];
 
         $this->manager->scan($manga->uid, $chapter->volume, $chapter->number)->get()->each(function ($scan) {
-            file_get_contents($scan->scan);
+            $this->assertTrue(filter_var($scan->scan, FILTER_VALIDATE_URL) !== false);
         });
     }
 }
