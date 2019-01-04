@@ -57,8 +57,10 @@ class MangafoxResourceParser
             ->set('chapters', new Collection($node->filter('#chapterlist > #list-2 > ul > li')->each(function ($node) {
                 $bag = new Bag();
 
+                $chapterTitles = explode('-', $node->filter('.title3')->text());
+
                 $bag->set('url', $this->manager->getAppUrl($node->filter('a')->attr('href')));
-                $bag->set('title', trim(explode('-', $node->filter('.title3')->text())[1]));
+                $bag->set('title', trim(array_pop($chapterTitles)));
                 $bag->set('released_at', $this->parseDate(trim($node->filter('.title2')->text())));
 
                 $number = floatval(preg_replace('/[c]/', '', basename(dirname($bag->get('url')))));
