@@ -35,8 +35,8 @@ class MangafoxScanParser
 
         return new Collection($node->filter('#viewer img')->each(function ($node) {
             $bag = new Bag();
-
-            $bag->set('scan', $node->attr('data-original'));
+	    
+            $bag->set('scan', "https:" . $node->attr('data-original'));
 
             return $bag;
         }));
