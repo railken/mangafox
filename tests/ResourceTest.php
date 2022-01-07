@@ -33,7 +33,7 @@ class ResourceTest extends TestCase
         $this->assertEquals('fairy_tail', $manga->uid);
         $this->assertEquals('https://fanfox.net/manga/fairy_tail', $manga->url);
         $this->assertEquals('Fairy Tail', $manga->name);
-        $this->assertEquals('https://s.fanfox.net/store/manga/246/cover.jpg', $manga->cover);
+        $this->assertEquals('https://fmcdn.mfcdn.net/store/manga/246/cover.jpg', explode("?", $manga->cover)[0]);
         $this->assertEquals('MASHIMA Hiro', $manga->author);
         $this->assertEquals('Completed', $manga->status);
     }
